@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Всички функции — Drive Radio</title>
+<meta name="description" content="Всичко, което Drive Radio прави — с реални снимки от приложението, не мокъпи.">
+<link rel="icon" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<style>
+  :root {
+    --bg: #050505;
+    --panel: #131313;
+    --panel-2: #1c1c1c;
+    --border: #2a2a2a;
+    --orange: #ff8c1a;
+    --orange-dim: #7a3f00;
+    --text: #e8e8e8;
+    --text-dim: #9a9a9a;
+    --amber: #ffc107;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px clamp(20px, 5vw, 64px);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: rgba(5,5,5,.9); backdrop-filter: blur(10px); z-index: 10;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand img { width: 34px; height: 34px; border-radius: 9px; }
+  .brand .word { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+  .brand .word b { color: var(--orange); font-weight: 800; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 12px 24px; border-radius: 100px; font-size: 14.5px; font-weight: 700;
+    text-decoration: none; border: 1px solid var(--border); transition: transform .15s, background .15s;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.primary { background: var(--orange); color: #1a0e02; border-color: var(--orange); }
+  .btn.primary:hover { background: #ffa03d; }
+
+  /* ---------- page intro ---------- */
+  .intro {
+    max-width: 760px; margin: 0 auto; text-align: center;
+    padding: clamp(56px, 8vw, 90px) 24px clamp(30px, 5vw, 50px);
+  }
+  .intro .eyebrow {
+    color: var(--orange); font-size: 12.5px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .intro h1 { font-size: clamp(28px, 4.5vw, 44px); font-weight: 800; margin: 0 0 18px; letter-spacing: -.02em; }
+  .intro p { color: var(--text-dim); font-size: 16px; line-height: 1.6; margin: 0; }
+
+  /* ---------- feature rows ---------- */
+  .feature {
+    max-width: 1080px; margin: 0 auto;
+    padding: clamp(50px, 6vw, 76px) clamp(20px, 5vw, 64px);
+    display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 6vw, 64px); align-items: center;
+  }
+  .feature.reverse .f-media { order: 2; }
+  .feature.reverse .f-text { order: 1; }
+  .feature.wide { grid-template-columns: 1fr; text-align: center; }
+  .feature.wide .f-text { max-width: 620px; margin: 0 auto 8px; }
+
+  .f-text .num { color: var(--orange-dim); font-size: 13px; font-weight: 800; letter-spacing: .08em; margin-bottom: 10px; }
+  .f-text h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; margin: 0 0 12px; letter-spacing: -.01em; line-height: 1.2; }
+  .f-text p { color: var(--text-dim); font-size: 15.5px; line-height: 1.65; margin: 0; max-width: 42ch; }
+  .feature.wide .f-text p { max-width: 52ch; margin: 0 auto; }
+
+  .f-media { display: flex; justify-content: center; }
+  .frame-p {
+    width: min(260px, 100%); border-radius: 26px; overflow: hidden;
+    border: 1px solid var(--border); background: #000;
+    box-shadow: 0 34px 80px -28px rgba(0,0,0,.85);
+  }
+  .frame-l {
+    width: 100%; max-width: 720px; border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border); background: #000;
+    box-shadow: 0 34px 80px -28px rgba(0,0,0,.85);
+  }
+  .dual { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .dual .frame-p { width: min(210px, 44%); }
+
+  section.feature + section.feature { border-top: 1px solid var(--border); }
+
+  @media (max-width: 760px) {
+    .feature { grid-template-columns: 1fr !important; text-align: center; }
+    .feature .f-text { order: 1 !important; }
+    .feature .f-media { order: 2 !important; }
+    .f-text p { max-width: 46ch; margin: 0 auto; }
+  }
+
+  /* ---------- detail grid ---------- */
+  .detail-grid-wrap {
+    max-width: 1080px; margin: 0 auto; padding: clamp(60px, 7vw, 90px) clamp(20px, 5vw, 64px);
+    border-top: 1px solid var(--border);
+  }
+  .detail-grid-wrap .eyebrow {
+    text-align: center; color: var(--orange); font-size: 12.5px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .detail-grid-wrap h2 { text-align: center; font-size: clamp(22px, 3.2vw, 30px); font-weight: 800; margin: 0 0 48px; }
+  .detail-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 22px;
+  }
+  .d-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+    overflow: hidden;
+  }
+  .d-card .shot { border-bottom: 1px solid var(--border); background: #000; }
+  .d-card .shot img { width: 100%; }
+  .d-card .cap { padding: 16px 18px 20px; }
+  .d-card h3 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; }
+  .d-card p { font-size: 13px; color: var(--text-dim); margin: 0; line-height: 1.5; }
+
+  .footer-cta {
+    max-width: 720px; margin: 0 auto; text-align: center;
+    padding: clamp(60px, 8vw, 100px) 24px clamp(90px, 10vw, 110px);
+  }
+  .footer-cta h2 { font-size: clamp(24px, 3.5vw, 32px); font-weight: 800; margin: 0 0 16px; }
+  .footer-cta p { color: var(--text-dim); font-size: 15.5px; margin: 0 0 32px; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 30px clamp(20px, 5vw, 64px);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+    color: var(--text-dim); font-size: 13px;
+  }
+  footer .flinks a { text-decoration: none; color: var(--text-dim); margin-left: 20px; }
+  footer .flinks a:hover { color: var(--text); }
+</style>
+</head>
+<body>
+
+  <header>
+    <a class="brand" href="/">
+      <img src="assets/logo.png" alt="Drive Radio">
+      <span class="word">Drive<b>Radio</b></span>
+    </a>
+    <a class="btn primary" href="https://player.driveradio.app">Слушай онлайн</a>
+  </header>
+
+  <section class="intro">
+    <div class="eyebrow">За приложението</div>
+    <h1>Всичко, което Drive Radio прави</h1>
+    <p>Реални снимки от самото приложение — не мокъпи, не обещания. Точно това виждаш, ако го инсталираш днес.</p>
+  </section>
+
+  <!-- 1 — Bluetooth Auto Start -->
+  <section class="feature">
+    <div class="f-text">
+      <div class="num">01</div>
+      <h2>Качи се. Свържи се. Drive Radio започва да свири.</h2>
+      <p>Избираш какво да се случва при свързване с колата си — веднъж, за всяко устройство. После Drive Radio просто се грижи за останалото, без нито един допълнителен тап.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-p"><img src="assets/screenshots/bluetooth-automation.png" alt="Настройки за автоматично пускане при Bluetooth свързване"></div>
+    </div>
+  </section>
+
+  <!-- 2 — easy setup -->
+  <section class="feature reverse">
+    <div class="f-text">
+      <div class="num">02</div>
+      <h2>Три стъпки, веднъж — после нищо за мислене.</h2>
+      <p>Drive Radio те превежда точно през нужните разрешения, обяснени на прост език, и спира дотам. Никакви излишни екрани.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-p"><img src="assets/screenshots/automation-setup.png" alt="Стъпки за настройка на автоматизацията"></div>
+    </div>
+  </section>
+
+  <!-- 3 — Android Auto (wide) -->
+  <section class="feature wide">
+    <div class="f-text">
+      <div class="num">03</div>
+      <h2>На екрана на колата, до навигацията — където му е мястото.</h2>
+      <p>Drive Radio се появява направо в Android Auto, докато Waze или Maps карат отпред.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-l"><img src="assets/screenshots/android-auto.png" alt="Drive Radio в Android Auto до навигация"></div>
+    </div>
+  </section>
+
+  <!-- 4 — Car Mode (wide) -->
+  <section class="feature wide">
+    <div class="f-text">
+      <div class="num">04</div>
+      <h2>Автомобилен режим — големи бутони, бърз достъп, нищо излишно.</h2>
+      <p>Навигация, музикално приложение и телефон — на един тап, без да търсиш из менюта докато шофираш.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-l"><img src="assets/screenshots/car-mode.png" alt="Автомобилен режим с бърз достъп"></div>
+    </div>
+  </section>
+
+  <!-- 5 — catalog -->
+  <section class="feature">
+    <div class="f-text">
+      <div class="num">05</div>
+      <h2>500+ радиостанции. Претърсени и подредени вместо теб.</h2>
+      <p>Всички български радиостанции на едно място — по държава, жанр или бързо търсене по име.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-p"><img src="assets/screenshots/catalog.png" alt="Каталог с над 500 радиостанции"></div>
+    </div>
+  </section>
+
+  <!-- 6 — worldwide -->
+  <section class="feature reverse">
+    <div class="f-text">
+      <div class="num">06</div>
+      <h2>Радио от цял свят, на един тап разстояние.</h2>
+      <p>От Лондон до Токио — хиляди станции извън България, подредени по държава и жанр.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-p"><img src="assets/screenshots/worldwide.png" alt="Радио станции от цял свят"></div>
+    </div>
+  </section>
+
+  <!-- 7 — favorites -->
+  <section class="feature">
+    <div class="f-text">
+      <div class="num">07</div>
+      <h2>Любими — само станциите, които наистина слушаш.</h2>
+      <p>Подреди ги по свой ред, с едно плъзгане. Те тръгват първи всеки път.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-p"><img src="assets/screenshots/favorites.png" alt="Списък с любими станции"></div>
+    </div>
+  </section>
+
+  <!-- 8 — history -->
+  <section class="feature reverse">
+    <div class="f-text">
+      <div class="num">08</div>
+      <h2>Тази песен от преди малко? Ето я.</h2>
+      <p>Пълна история на всичко изсвирено — търсене по песен или станция, групирано по дни.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-p"><img src="assets/screenshots/history.png" alt="История на изсвирените песни"></div>
+    </div>
+  </section>
+
+  <!-- 9 — music platforms -->
+  <section class="feature">
+    <div class="f-text">
+      <div class="num">09</div>
+      <h2>Хареса песента? Едно докосване до Spotify.</h2>
+      <p>Директна връзка към Spotify, YouTube Music, Deezer и още — точно за песента, която в момента върви.</p>
+    </div>
+    <div class="f-media">
+      <div class="frame-p"><img src="assets/screenshots/music-platforms.png" alt="Избор на музикална платформа"></div>
+    </div>
+  </section>
+
+  <!-- detail grid: the long tail, real shots, shorter treatment -->
+  <div class="detail-grid-wrap">
+    <div class="eyebrow">И детайлите</div>
+    <h2>Малките неща, които правят разликата</h2>
+    <div class="detail-grid">
+      <div class="d-card">
+        <div class="shot"><img src="assets/screenshots/settings.png" alt="Основни настройки"></div>
+        <div class="cap"><h3>Настройки, на едно място</h3><p>Bluetooth устройства, език, платформа, плейбек — всичко ясно подредено.</p></div>
+      </div>
+      <div class="d-card">
+        <div class="shot"><img src="assets/screenshots/playback-settings.png" alt="Настройки за плейбек"></div>
+        <div class="cap"><h3>Твоите правила</h3><p>Timer за заспиване, поведение на Next/Prev — ти решаваш.</p></div>
+      </div>
+      <div class="d-card">
+        <div class="shot"><img src="assets/screenshots/languages.png" alt="Избор на език"></div>
+        <div class="cap"><h3>На твоя език</h3><p>Приложението говори твоя език, не само български.</p></div>
+      </div>
+      <div class="d-card">
+        <div class="shot"><img src="assets/screenshots/premium-upgrade.png" alt="Premium функция"></div>
+        <div class="cap"><h3>Premium, когато поискаш</h3><p>Безплатното е достатъчно добро. Premium просто прави всичко още по-приятно.</p></div>
+      </div>
+      <div class="d-card">
+        <div class="shot"><img src="assets/screenshots/help-feedback.png" alt="Помощ и обратна връзка"></div>
+        <div class="cap"><h3>Помощ, когато ти трябва</h3><p>Обратна връзка и подкрепа — на един клик разстояние.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="footer-cta">
+    <h2>Готов да чуеш разликата?</h2>
+    <p>Безплатно е и стартира само щом влезеш в колата.</p>
+    <a class="btn primary" href="https://player.driveradio.app">Слушай онлайн сега</a>
+  </section>
+
+  <footer>
+    <span>© 2026 Drive Radio</span>
+    <div class="flinks">
+      <a href="/">Начало</a>
+      <a href="https://player.driveradio.app">Уеб плеър</a>
+    </div>
+  </footer>
+
+</body>
+</html>
