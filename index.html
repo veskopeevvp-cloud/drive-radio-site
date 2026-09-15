@@ -68,7 +68,7 @@
     font-size: clamp(16px, 2.2vw, 19px); color: var(--text-dim);
     max-width: 46ch; margin: 0 auto 40px; line-height: 1.6;
   }
-  .ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .ctas { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
   .btn {
     display: inline-flex; align-items: center; gap: 9px;
     padding: 15px 30px; border-radius: 100px; font-size: 15.5px; font-weight: 700;
@@ -80,6 +80,9 @@
   .btn.ghost { background: var(--panel); color: var(--text); }
   .btn.ghost:hover { background: var(--panel-2); border-color: #3a3a3a; }
   .btn svg { width: 17px; height: 17px; }
+  .badge { display: inline-flex; transition: transform .15s, opacity .15s; }
+  .badge:hover { transform: translateY(-1px); opacity: .92; }
+  .badge img { height: 58px; width: auto; }
 
   /* ---------- hero screenshot strip ---------- */
   .hero-shots {
@@ -157,9 +160,8 @@
     <h1>Drive <span class="amp">&amp;</span> Listen</h1>
     <p class="tagline">Drive Radio се грижи музиката да е винаги с теб, без да се налага да мислиш за нея.</p>
     <div class="ctas">
-      <a class="btn primary" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12 3.84 21.85c-.5-.24-.84-.76-.84-1.35zm12.13-7.15L4.05 2.66c.32-.24.7-.4 1.1-.4.31 0 .61.09.87.24l11.63 6.6-2.52 2.65zm0 1.3l2.52 2.65-11.63 6.6c-.26.15-.56.24-.87.24-.4 0-.78-.16-1.1-.4l11.08-9.09zm3.75-3.48l2.99 1.7c.66.38.66 1.26 0 1.64l-2.99 1.7-2.62-2.52 2.62-2.52z"/></svg>
-        Изтегли от Google Play
+      <a class="badge" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
+        <img src="assets/google-play-badge.png" alt="Изтегли от Google Play">
       </a>
       <a class="btn ghost" href="app.html">За приложението</a>
     </div>
@@ -202,9 +204,8 @@
     <h2>Готов за път?</h2>
     <p>Свържи телефона с колата и остави Drive Radio да свърши останалото.</p>
     <div class="ctas">
-      <a class="btn primary" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12 3.84 21.85c-.5-.24-.84-.76-.84-1.35zm12.13-7.15L4.05 2.66c.32-.24.7-.4 1.1-.4.31 0 .61.09.87.24l11.63 6.6-2.52 2.65zm0 1.3l2.52 2.65-11.63 6.6c-.26.15-.56.24-.87.24-.4 0-.78-.16-1.1-.4l11.08-9.09zm3.75-3.48l2.99 1.7c.66.38.66 1.26 0 1.64l-2.99 1.7-2.62-2.52 2.62-2.52z"/></svg>
-        Изтегли от Google Play
+      <a class="badge" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
+        <img src="assets/google-play-badge.png" alt="Изтегли от Google Play">
       </a>
       <a class="btn ghost" href="https://player.driveradio.app">Слушай онлайн</a>
     </div>
