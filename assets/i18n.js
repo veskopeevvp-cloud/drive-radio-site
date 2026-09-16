@@ -47,6 +47,11 @@
       bg: 'Твоите станции, подредени по твой начин, винаги под ръка.',
       en: 'Your stations, arranged your way, always within reach.',
     },
+    hl_reconnect_title: { bg: 'Никога не спира', en: 'Never stops' },
+    hl_reconnect_desc: {
+      bg: 'Изгубиш ли мобилни данни или интернет, радиото само се свързва отново, щом се появят.',
+      en: 'Lose mobile data or internet, and the radio reconnects on its own the moment it’s back.',
+    },
     index_footer_cta_h2: { bg: 'Готов за път?', en: 'Ready to hit the road?' },
     index_footer_cta_p: {
       bg: 'Свържи телефона с колата и остави Drive Radio да свърши останалото.',
