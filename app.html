@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="bg" data-i18n-title="app_title">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Всички функции — Drive Radio</title>
-<meta name="description" content="Всичко, което Drive Radio прави — с реални снимки от приложението, не мокъпи.">
+<meta name="description" content="Всичко, което Drive Radio прави — с реални снимки от приложението, не мокъпи." data-i18n-content="app_meta_description">
 <link rel="icon" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <style>
@@ -32,7 +32,7 @@
   img { max-width: 100%; display: block; }
 
   header {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
     padding: 22px clamp(20px, 5vw, 64px);
     border-bottom: 1px solid var(--border);
     position: sticky; top: 0; background: rgba(5,5,5,.9); backdrop-filter: blur(10px); z-index: 10;
@@ -57,6 +57,13 @@
   .badge { display: inline-flex; transition: transform .15s, opacity .15s; }
   .badge:hover { transform: translateY(-1px); opacity: .92; }
   .badge img { height: 58px; width: auto; }
+  .lang-toggle { display: flex; align-items: center; gap: 2px; background: var(--panel); border: 1px solid var(--border); border-radius: 100px; padding: 3px; flex-shrink: 0; }
+  .lang-toggle button {
+    border: none; background: none; color: var(--text-dim); font-size: 12.5px; font-weight: 700;
+    padding: 6px 12px; border-radius: 100px; cursor: pointer; letter-spacing: .02em; font-family: inherit;
+  }
+  .lang-toggle button.active { background: var(--orange); color: #1a0e02; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
 
   /* ---------- page intro ---------- */
   .intro {
@@ -155,24 +162,30 @@
       <img src="assets/logo.png" alt="Drive Radio">
       <span class="word">Drive<b>Radio</b></span>
     </a>
-    <a class="btn primary" href="https://player.driveradio.app">Слушай онлайн</a>
+    <div class="header-right">
+      <a class="btn primary" href="https://player.driveradio.app" data-i18n="nav_listen">Слушай онлайн</a>
+      <div class="lang-toggle" data-lang-toggle>
+        <button data-lang="bg" class="active">БГ</button>
+        <button data-lang="en">EN</button>
+      </div>
+    </div>
   </header>
 
   <section class="intro">
-    <div class="eyebrow">За приложението</div>
-    <h1>Всичко, което Drive Radio прави</h1>
-    <p>Реални снимки от самото приложение — не мокъпи, не обещания. Точно това виждаш, ако го инсталираш днес.</p>
+    <div class="eyebrow" data-i18n="intro_eyebrow">За приложението</div>
+    <h1 data-i18n="intro_h1">Всичко, което Drive Radio прави</h1>
+    <p data-i18n="intro_p">Реални снимки от самото приложение — не мокъпи, не обещания. Точно това виждаш, ако го инсталираш днес.</p>
   </section>
 
   <!-- 1 — Bluetooth Auto Start -->
   <section class="feature">
     <div class="f-text">
       <div class="num">01</div>
-      <h2>Качи се. Свържи се. Drive Radio започва да свири.</h2>
-      <p>Избираш какво да се случва при свързване с колата си — веднъж, за всяко устройство. После Drive Radio просто се грижи за останалото, без нито един допълнителен тап.</p>
+      <h2 data-i18n="f01_h2">Качи се. Свържи се. Drive Radio започва да свири.</h2>
+      <p data-i18n="f01_p">Избираш какво да се случва при свързване с колата си — веднъж, за всяко устройство. После Drive Radio просто се грижи за останалото, без нито един допълнителен тап.</p>
     </div>
     <div class="f-media">
-      <div class="frame-p"><img src="assets/screenshots/bluetooth-automation.png" alt="Настройки за автоматично пускане при Bluetooth свързване"></div>
+      <div class="frame-p"><img src="assets/screenshots/bluetooth-automation.png" alt="Настройки за автоматично пускане при Bluetooth свързване" data-i18n-alt="f01_alt"></div>
     </div>
   </section>
 
@@ -180,11 +193,11 @@
   <section class="feature reverse">
     <div class="f-text">
       <div class="num">02</div>
-      <h2>Три стъпки, веднъж — после нищо за мислене.</h2>
-      <p>Drive Radio те превежда точно през нужните разрешения, обяснени на прост език, и спира дотам. Никакви излишни екрани.</p>
+      <h2 data-i18n="f02_h2">Три стъпки, веднъж — после нищо за мислене.</h2>
+      <p data-i18n="f02_p">Drive Radio те превежда точно през нужните разрешения, обяснени на прост език, и спира дотам. Никакви излишни екрани.</p>
     </div>
     <div class="f-media">
-      <div class="frame-p"><img src="assets/screenshots/automation-setup.png" alt="Стъпки за настройка на автоматизацията"></div>
+      <div class="frame-p"><img src="assets/screenshots/automation-setup.png" alt="Стъпки за настройка на автоматизацията" data-i18n-alt="f02_alt"></div>
     </div>
   </section>
 
@@ -192,11 +205,11 @@
   <section class="feature wide">
     <div class="f-text">
       <div class="num">03</div>
-      <h2>На екрана на колата, до навигацията — където му е мястото.</h2>
-      <p>Drive Radio се появява направо в Android Auto, докато Waze или Maps карат отпред.</p>
+      <h2 data-i18n="f03_h2">На екрана на колата, до навигацията — където му е мястото.</h2>
+      <p data-i18n="f03_p">Drive Radio се появява направо в Android Auto, докато Waze или Maps карат отпред.</p>
     </div>
     <div class="f-media">
-      <div class="frame-l"><img src="assets/screenshots/android-auto.png" alt="Drive Radio в Android Auto до навигация"></div>
+      <div class="frame-l"><img src="assets/screenshots/android-auto.png" alt="Drive Radio в Android Auto до навигация" data-i18n-alt="f03_alt"></div>
     </div>
   </section>
 
@@ -204,11 +217,11 @@
   <section class="feature wide">
     <div class="f-text">
       <div class="num">04</div>
-      <h2>Автомобилен режим — големи бутони, бърз достъп, нищо излишно.</h2>
-      <p>Навигация, музикално приложение и телефон — на един тап, без да търсиш из менюта докато шофираш. Списъкът със станции се появява с един тап и сам се скрива след кратко бездействие.</p>
+      <h2 data-i18n="f04_h2">Автомобилен режим — големи бутони, бърз достъп, нищо излишно.</h2>
+      <p data-i18n="f04_p">Навигация, музикално приложение и телефон — на един тап, без да търсиш из менюта докато шофираш. Списъкът със станции се появява с един тап и сам се скрива след кратко бездействие.</p>
     </div>
     <div class="f-media">
-      <div class="frame-l"><img src="assets/screenshots/car-mode.png" alt="Автомобилен режим с бърз достъп"></div>
+      <div class="frame-l"><img src="assets/screenshots/car-mode.png" alt="Автомобилен режим с бърз достъп" data-i18n-alt="f04_alt"></div>
     </div>
   </section>
 
@@ -216,11 +229,11 @@
   <section class="feature">
     <div class="f-text">
       <div class="num">05</div>
-      <h2>Над 100 подбрани станции. Претърсени и подредени вместо теб.</h2>
-      <p>Всички български радиостанции на едно място — по държава, жанр или бързо търсене по име.</p>
+      <h2 data-i18n="f05_h2">Над 100 подбрани станции. Претърсени и подредени вместо теб.</h2>
+      <p data-i18n="f05_p">Всички български радиостанции на едно място — по държава, жанр или бързо търсене по име.</p>
     </div>
     <div class="f-media">
-      <div class="frame-p"><img src="assets/screenshots/catalog.png" alt="Каталог с над 100 подбрани радиостанции"></div>
+      <div class="frame-p"><img src="assets/screenshots/catalog.png" alt="Каталог с над 100 подбрани радиостанции" data-i18n-alt="f05_alt"></div>
     </div>
   </section>
 
@@ -228,11 +241,11 @@
   <section class="feature reverse">
     <div class="f-text">
       <div class="num">06</div>
-      <h2>Радиостанции от цял свят, на един тап разстояние.</h2>
-      <p>Откривай станции от различни държави и жанрове, без да напускаш Drive Radio.</p>
+      <h2 data-i18n="f06_h2">Радиостанции от цял свят, на един тап разстояние.</h2>
+      <p data-i18n="f06_p">Откривай станции от различни държави и жанрове, без да напускаш Drive Radio.</p>
     </div>
     <div class="f-media">
-      <div class="frame-p"><img src="assets/screenshots/worldwide.png" alt="Радио станции от цял свят"></div>
+      <div class="frame-p"><img src="assets/screenshots/worldwide.png" alt="Радио станции от цял свят" data-i18n-alt="f06_alt"></div>
     </div>
   </section>
 
@@ -240,11 +253,11 @@
   <section class="feature">
     <div class="f-text">
       <div class="num">07</div>
-      <h2>Любими — само станциите, които наистина слушаш.</h2>
-      <p>Подреди ги по свой ред, с едно плъзгане. Твоите станции остават точно както ги искаш.</p>
+      <h2 data-i18n="f07_h2">Любими — само станциите, които наистина слушаш.</h2>
+      <p data-i18n="f07_p">Подреди ги по свой ред, с едно плъзгане. Твоите станции остават точно както ги искаш.</p>
     </div>
     <div class="f-media">
-      <div class="frame-p"><img src="assets/screenshots/favorites.png" alt="Списък с любими станции"></div>
+      <div class="frame-p"><img src="assets/screenshots/favorites.png" alt="Списък с любими станции" data-i18n-alt="f07_alt"></div>
     </div>
   </section>
 
@@ -252,11 +265,11 @@
   <section class="feature reverse">
     <div class="f-text">
       <div class="num">08</div>
-      <h2>Тази песен от преди малко? Ето я.</h2>
-      <p>Пълна история на всичко изсвирено — търсене по песен или станция, групирано по дни.</p>
+      <h2 data-i18n="f08_h2">Тази песен от преди малко? Ето я.</h2>
+      <p data-i18n="f08_p">Пълна история на всичко изсвирено — търсене по песен или станция, групирано по дни.</p>
     </div>
     <div class="f-media">
-      <div class="frame-p"><img src="assets/screenshots/history.png" alt="История на изсвирените песни"></div>
+      <div class="frame-p"><img src="assets/screenshots/history.png" alt="История на изсвирените песни" data-i18n-alt="f08_alt"></div>
     </div>
   </section>
 
@@ -264,72 +277,73 @@
   <section class="feature">
     <div class="f-text">
       <div class="num">09</div>
-      <h2>Хареса песента? Едно докосване до Spotify.</h2>
-      <p>Директна връзка към Spotify, YouTube Music, Deezer и още — точно за песента, която в момента върви.</p>
+      <h2 data-i18n="f09_h2">Хареса песента? Едно докосване до Spotify.</h2>
+      <p data-i18n="f09_p">Директна връзка към Spotify, YouTube Music, Deezer и още — точно за песента, която в момента върви.</p>
     </div>
     <div class="f-media">
-      <div class="frame-p"><img src="assets/screenshots/music-platforms.png" alt="Избор на музикална платформа"></div>
+      <div class="frame-p"><img src="assets/screenshots/music-platforms.png" alt="Избор на музикална платформа" data-i18n-alt="f09_alt"></div>
     </div>
   </section>
 
   <!-- detail grid: the long tail, real shots, shorter treatment -->
   <div class="detail-grid-wrap">
-    <div class="eyebrow">И детайлите</div>
-    <h2>Малките неща, които правят разликата</h2>
+    <div class="eyebrow" data-i18n="detail_eyebrow">И детайлите</div>
+    <h2 data-i18n="detail_h2">Малките неща, които правят разликата</h2>
     <div class="detail-grid">
       <div class="d-card">
-        <div class="shot"><img src="assets/screenshots/onboarding.png" alt="Лесно първо стартиране"></div>
-        <div class="cap"><h3>Лесно начало</h3><p>Кратко въведение, после право към музиката — без излишни екрани.</p></div>
+        <div class="shot"><img src="assets/screenshots/onboarding.png" alt="Лесно първо стартиране" data-i18n-alt="d_onboarding_alt"></div>
+        <div class="cap"><h3 data-i18n="d_onboarding_title">Лесно начало</h3><p data-i18n="d_onboarding_desc">Кратко въведение, после право към музиката — без излишни екрани.</p></div>
       </div>
       <div class="d-card">
-        <div class="shot"><img src="assets/screenshots/onboarding-done.png" alt="Край на въведението с вход в акаунт"></div>
-        <div class="cap"><h3>Готово за тръгване</h3><p>Влез, за да синхронизираш любимите между устройствата си — или просто продължи без акаунт.</p></div>
+        <div class="shot"><img src="assets/screenshots/onboarding-done.png" alt="Край на въведението с вход в акаунт" data-i18n-alt="d_onboarding_done_alt"></div>
+        <div class="cap"><h3 data-i18n="d_onboarding_done_title">Готово за тръгване</h3><p data-i18n="d_onboarding_done_desc">Влез, за да синхронизираш любимите между устройствата си — или просто продължи без акаунт.</p></div>
       </div>
       <div class="d-card">
-        <div class="shot"><img src="assets/screenshots/car-quick-buttons.png" alt="Бързи бутони в Автомобилен режим"></div>
-        <div class="cap"><h3>Всичко на един поглед</h3><p>Навигация, музика, телефон — винаги на екрана, дори когато списъкът със станции сам се скрие.</p></div>
+        <div class="shot"><img src="assets/screenshots/car-quick-buttons.png" alt="Бързи бутони в Автомобилен режим" data-i18n-alt="d_quickbuttons_alt"></div>
+        <div class="cap"><h3 data-i18n="d_quickbuttons_title">Всичко на един поглед</h3><p data-i18n="d_quickbuttons_desc">Навигация, музика, телефон — винаги на екрана, дори когато списъкът със станции сам се скрие.</p></div>
       </div>
       <div class="d-card">
-        <div class="shot"><img src="assets/screenshots/settings.png" alt="Основни настройки"></div>
-        <div class="cap"><h3>Настройки, на едно място</h3><p>Bluetooth устройства, език, платформа, плейбек — всичко ясно подредено.</p></div>
+        <div class="shot"><img src="assets/screenshots/settings.png" alt="Основни настройки" data-i18n-alt="d_settings_alt"></div>
+        <div class="cap"><h3 data-i18n="d_settings_title">Настройки, на едно място</h3><p data-i18n="d_settings_desc">Bluetooth устройства, език, платформа, плейбек — всичко ясно подредено.</p></div>
       </div>
       <div class="d-card">
-        <div class="shot"><img src="assets/screenshots/playback-settings.png" alt="Настройки за плейбек"></div>
-        <div class="cap"><h3>Твоите правила</h3><p>Timer за заспиване, поведение на Next/Prev — ти решаваш.</p></div>
+        <div class="shot"><img src="assets/screenshots/playback-settings.png" alt="Настройки за плейбек" data-i18n-alt="d_playback_alt"></div>
+        <div class="cap"><h3 data-i18n="d_playback_title">Твоите правила</h3><p data-i18n="d_playback_desc">Timer за заспиване, поведение на Next/Prev — ти решаваш.</p></div>
       </div>
       <div class="d-card">
-        <div class="shot"><img src="assets/screenshots/languages.png" alt="Избор на език"></div>
-        <div class="cap"><h3>На твоя език</h3><p>Приложението говори твоя език, не само български.</p></div>
+        <div class="shot"><img src="assets/screenshots/languages.png" alt="Избор на език" data-i18n-alt="d_languages_alt"></div>
+        <div class="cap"><h3 data-i18n="d_languages_title">На твоя език</h3><p data-i18n="d_languages_desc">Приложението говори твоя език, не само български.</p></div>
       </div>
       <div class="d-card">
-        <div class="shot"><img src="assets/screenshots/premium-upgrade.png" alt="Premium функция"></div>
-        <div class="cap"><h3>Premium, когато поискаш</h3><p>Безплатното е достатъчно добро. Premium просто прави всичко още по-приятно.</p></div>
+        <div class="shot"><img src="assets/screenshots/premium-upgrade.png" alt="Premium функция" data-i18n-alt="d_premium_alt"></div>
+        <div class="cap"><h3 data-i18n="d_premium_title">Premium, когато поискаш</h3><p data-i18n="d_premium_desc">Безплатното е достатъчно добро. Premium просто прави всичко още по-приятно.</p></div>
       </div>
       <div class="d-card">
-        <div class="shot"><img src="assets/screenshots/help-feedback.png" alt="Помощ и обратна връзка"></div>
-        <div class="cap"><h3>Помощ, когато ти трябва</h3><p>Обратна връзка и подкрепа — на един клик разстояние.</p></div>
+        <div class="shot"><img src="assets/screenshots/help-feedback.png" alt="Помощ и обратна връзка" data-i18n-alt="d_help_alt"></div>
+        <div class="cap"><h3 data-i18n="d_help_title">Помощ, когато ти трябва</h3><p data-i18n="d_help_desc">Обратна връзка и подкрепа — на един клик разстояние.</p></div>
       </div>
     </div>
   </div>
 
   <section class="footer-cta">
-    <h2>Готов да чуеш разликата?</h2>
-    <p>Безплатно е и стартира само щом влезеш в колата.</p>
+    <h2 data-i18n="app_footer_cta_h2">Готов да чуеш разликата?</h2>
+    <p data-i18n="app_footer_cta_p">Безплатно е и стартира само щом влезеш в колата.</p>
     <div class="ctas">
       <a class="badge" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
-        <img src="assets/google-play-badge.png" alt="Изтегли от Google Play">
+        <img src="assets/google-play-badge.png" alt="Изтегли от Google Play" data-i18n-alt="download_badge_alt">
       </a>
-      <a class="btn ghost" href="https://player.driveradio.app">Слушай онлайн</a>
+      <a class="btn ghost" href="https://player.driveradio.app" data-i18n="nav_listen">Слушай онлайн</a>
     </div>
   </section>
 
   <footer>
     <span>© 2026 Drive Radio</span>
     <div class="flinks">
-      <a href="/">Начало</a>
-      <a href="https://player.driveradio.app">Уеб плеър</a>
+      <a href="/" data-i18n="nav_home">Начало</a>
+      <a href="https://player.driveradio.app" data-i18n="web_player">Уеб плеър</a>
     </div>
   </footer>
 
+  <script src="assets/i18n.js" defer></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="bg" data-i18n-title="index_title">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Drive Radio — Радиото за колата</title>
-<meta name="description" content="Радиото, което тръгва само щом влезеш в колата. Стотици станции, любими на един тап, Android Auto — без да докосваш телефона.">
+<meta name="description" content="Радиото, което тръгва само щом влезеш в колата. Стотици станции, любими на един тап, Android Auto — без да докосваш телефона." data-i18n-content="index_meta_description">
 <link rel="icon" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <style>
@@ -48,6 +48,12 @@
     white-space: nowrap; transition: color .15s;
   }
   nav a:hover { color: var(--text); }
+  .lang-toggle { display: flex; align-items: center; gap: 2px; background: var(--panel); border: 1px solid var(--border); border-radius: 100px; padding: 3px; flex-shrink: 0; }
+  .lang-toggle button {
+    border: none; background: none; color: var(--text-dim); font-size: 12.5px; font-weight: 700;
+    padding: 6px 12px; border-radius: 100px; cursor: pointer; letter-spacing: .02em; font-family: inherit;
+  }
+  .lang-toggle button.active { background: var(--orange); color: #1a0e02; }
 
   /* ---------- hero ---------- */
   .hero {
@@ -150,74 +156,79 @@
       <span class="word">Drive<b>Radio</b></span>
     </a>
     <nav>
-      <a href="app.html">За приложението</a>
-      <a href="https://player.driveradio.app">Слушай онлайн</a>
+      <a href="app.html" data-i18n="nav_app">За приложението</a>
+      <a href="https://player.driveradio.app" data-i18n="nav_listen">Слушай онлайн</a>
+      <div class="lang-toggle" data-lang-toggle>
+        <button data-lang="bg" class="active">БГ</button>
+        <button data-lang="en">EN</button>
+      </div>
     </nav>
   </header>
 
   <section class="hero">
     <img class="mark" src="assets/logo.png" alt="">
     <h1>Drive <span class="amp">&amp;</span> Listen</h1>
-    <p class="tagline">Drive Radio се грижи музиката да е винаги с теб, без да се налага да мислиш за нея.</p>
+    <p class="tagline" data-i18n="hero_tagline">Drive Radio се грижи музиката да е винаги с теб, без да се налага да мислиш за нея.</p>
     <div class="ctas">
       <a class="badge" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
-        <img src="assets/google-play-badge.png" alt="Изтегли от Google Play">
+        <img src="assets/google-play-badge.png" alt="Изтегли от Google Play" data-i18n-alt="download_badge_alt">
       </a>
-      <a class="btn ghost" href="app.html">За приложението</a>
+      <a class="btn ghost" href="app.html" data-i18n="nav_app">За приложението</a>
     </div>
 
     <div class="hero-shots">
-      <div class="frame side"><img src="assets/screenshots/catalog.png" alt="Каталог със станции"></div>
-      <div class="frame mid"><img src="assets/screenshots/favorites.png" alt="Плейър и любими станции"></div>
-      <div class="frame side"><img src="assets/screenshots/history.png" alt="История на песните"></div>
+      <div class="frame side"><img src="assets/screenshots/catalog.png" alt="Каталог със станции" data-i18n-alt="shot_catalog_alt"></div>
+      <div class="frame mid"><img src="assets/screenshots/favorites.png" alt="Плейър и любими станции" data-i18n-alt="shot_favorites_alt"></div>
+      <div class="frame side"><img src="assets/screenshots/history.png" alt="История на песните" data-i18n-alt="shot_history_alt"></div>
     </div>
   </section>
 
   <section class="highlights">
-    <div class="eyebrow">Защо Drive Radio</div>
-    <h2>Радио, направено за шофиране — не за докосване</h2>
+    <div class="eyebrow" data-i18n="highlights_eyebrow">Защо Drive Radio</div>
+    <h2 data-i18n="highlights_h2">Радио, направено за шофиране — не за докосване</h2>
     <div class="hl-grid">
       <div class="hl-card">
         <div class="ic">🔵</div>
-        <h3>Bluetooth Auto Start</h3>
-        <p>Качи се. Свържи се. Drive Radio започва да свири — без да вадиш телефона.</p>
+        <h3 data-i18n="hl_bluetooth_title">Bluetooth Auto Start</h3>
+        <p data-i18n="hl_bluetooth_desc">Качи се. Свържи се. Drive Radio започва да свири — без да вадиш телефона.</p>
       </div>
       <div class="hl-card">
         <div class="ic">📻</div>
-        <h3>Стотици станции</h3>
-        <p>Над 100 подбрани български радиостанции, плюс хиляди от цял свят.</p>
+        <h3 data-i18n="hl_stations_title">Стотици станции</h3>
+        <p data-i18n="hl_stations_desc">Над 100 подбрани български радиостанции, плюс хиляди от цял свят.</p>
       </div>
       <div class="hl-card">
         <div class="ic">🚗</div>
-        <h3>Android Auto</h3>
-        <p>Направо на екрана на колата, до навигацията.</p>
+        <h3 data-i18n="hl_aa_title">Android Auto</h3>
+        <p data-i18n="hl_aa_desc">Направо на екрана на колата, до навигацията.</p>
       </div>
       <div class="hl-card">
         <div class="ic">⭐</div>
-        <h3>Любими</h3>
-        <p>Твоите станции, подредени по твой начин, винаги под ръка.</p>
+        <h3 data-i18n="hl_favorites_title">Любими</h3>
+        <p data-i18n="hl_favorites_desc">Твоите станции, подредени по твой начин, винаги под ръка.</p>
       </div>
     </div>
   </section>
 
   <section class="footer-cta">
-    <h2>Готов за път?</h2>
-    <p>Свържи телефона с колата и остави Drive Radio да свърши останалото.</p>
+    <h2 data-i18n="index_footer_cta_h2">Готов за път?</h2>
+    <p data-i18n="index_footer_cta_p">Свържи телефона с колата и остави Drive Radio да свърши останалото.</p>
     <div class="ctas">
       <a class="badge" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
-        <img src="assets/google-play-badge.png" alt="Изтегли от Google Play">
+        <img src="assets/google-play-badge.png" alt="Изтегли от Google Play" data-i18n-alt="download_badge_alt">
       </a>
-      <a class="btn ghost" href="https://player.driveradio.app">Слушай онлайн</a>
+      <a class="btn ghost" href="https://player.driveradio.app" data-i18n="nav_listen">Слушай онлайн</a>
     </div>
   </section>
 
   <footer>
     <span>© 2026 Drive Radio</span>
     <div class="flinks">
-      <a href="app.html">За приложението</a>
-      <a href="https://player.driveradio.app">Уеб плеър</a>
+      <a href="app.html" data-i18n="nav_app">За приложението</a>
+      <a href="https://player.driveradio.app" data-i18n="web_player">Уеб плеър</a>
     </div>
   </footer>
 
+  <script src="assets/i18n.js" defer></script>
 </body>
 </html>
