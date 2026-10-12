@@ -15,6 +15,26 @@
     web_player: { bg: 'Уеб плеър', en: 'Web player' },
     download_badge_alt: { bg: 'Изтегли от Google Play', en: 'Get it on Google Play' },
 
+    // plans section (index.html)
+    plans_eyebrow: { bg: 'Абонаменти', en: 'Subscriptions' },
+    plans_h2: { bg: 'Започни безплатно', en: 'Start free' },
+    plans_free_badge: { bg: 'Безплатно', en: 'Free' },
+    plans_all_from_free: { bg: 'Всичко от Free, плюс:', en: 'Everything in Free, plus:' },
+    plans_price: { bg: '1,99 € / месец', en: '€1.99 / month' },
+    plans_price_year: { bg: 'или 14,99 € на година', en: 'or €14.99 per year' },
+    plans_free_1: { bg: 'Автоматичен старт при Bluetooth връзка', en: 'Automatic start on Bluetooth connection' },
+    plans_free_2: { bg: 'Станции от България и света', en: 'Stations from Bulgaria and the world' },
+    plans_free_3: { bg: 'Android Auto и управление от волана', en: 'Android Auto and steering wheel controls' },
+    plans_free_4: { bg: 'Car Mode: часовник, температура и големи бутони за радиото', en: 'Car Mode: clock, temperature and big radio buttons' },
+    plans_free_5: { bg: 'Таймер за заспиване и еквалайзер', en: 'Sleep timer and equalizer' },
+    plans_free_6: { bg: 'До 10 любими станции', en: 'Up to 10 favorite stations' },
+    plans_prem_1: { bg: 'Песен и обложка на екрана', en: 'Song title and album art on screen' },
+    plans_prem_2: { bg: 'Песента в Spotify, YouTube, Deezer и Tidal', en: 'Open the song in Spotify, YouTube, Deezer and Tidal' },
+    plans_prem_3: { bg: 'Пълна история на слушането', en: 'Full listening history' },
+    plans_prem_4: { bg: 'Любими без лимит, на всички устройства', en: 'Unlimited favorites, on all your devices' },
+    plans_prem_5: { bg: 'Автоматична навигация и бързи бутони в Car Mode (навигация, музика, телефон)', en: 'Auto-launch navigation and quick buttons in Car Mode (navigation, music, phone)' },
+    plans_prem_6: { bg: 'Свой еквалайзер и екран, който не гасне', en: 'Your own equalizer presets and a screen that stays on' },
+
     // index.html
     index_title: { bg: 'Drive Radio — Радиото за колата', en: 'Drive Radio — The radio for your car' },
     index_meta_description: {

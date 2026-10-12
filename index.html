@@ -133,6 +133,33 @@
   .hl-card h3 { font-size: 16.5px; font-weight: 700; margin: 0 0 8px; }
   .hl-card p { font-size: 14px; color: var(--text-dim); margin: 0; line-height: 1.55; }
 
+  /* ---------- plans ---------- */
+  .plans {
+    max-width: 1080px; margin: 0 auto; padding: clamp(70px, 8vw, 110px) clamp(20px, 5vw, 64px);
+    border-top: 1px solid var(--border);
+  }
+  .plans .eyebrow {
+    text-align: center; color: var(--orange); font-size: 12.5px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .plans h2 {
+    text-align: center; font-size: clamp(24px, 3.5vw, 34px); font-weight: 800;
+    margin: 0 0 52px; letter-spacing: -.01em; text-wrap: balance;
+  }
+  .plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-items: start; }
+  .plan-card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 26px 24px; }
+  .plan-card.premium { border-color: var(--orange); background: linear-gradient(180deg, rgba(255,140,26,.14), var(--panel) 55%); }
+  .plan-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .plan-head h3 { font-size: 19px; font-weight: 800; margin: 0; }
+  .plan-pill { font-size: 12.5px; font-weight: 700; padding: 5px 12px; border-radius: 100px; background: var(--panel-2); color: var(--text); white-space: nowrap; }
+  .plan-card.premium .plan-pill { background: var(--orange); color: #1a0e02; }
+  .plan-sub { color: var(--text-dim); font-size: 13px; margin: 12px 0 4px; }
+  .plan-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 11px; }
+  .plan-list li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; font-size: 14.5px; line-height: 1.45; }
+  .plan-list li::before { content: "\2713"; color: #4cd964; font-weight: 800; }
+  .plan-card.premium .plan-list li::before { color: var(--orange); }
+  .plan-year { margin: 18px 0 0; padding-top: 14px; border-top: 1px dashed var(--border); color: var(--text-dim); font-size: 13.5px; }
+
   /* ---------- footer cta ---------- */
   .footer-cta {
     max-width: 720px; margin: 0 auto; text-align: center;
@@ -228,6 +255,43 @@
         <div class="ic">🔄</div>
         <h3 data-i18n="hl_reconnect_title">Никога не спира</h3>
         <p data-i18n="hl_reconnect_desc">Изгубиш ли мобилни данни или интернет, радиото само се свързва отново, щом се появят.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="plans" id="plans">
+    <div class="eyebrow" data-i18n="plans_eyebrow">Абонаменти</div>
+    <h2 data-i18n="plans_h2">Започни безплатно</h2>
+    <div class="plan-grid">
+      <div class="plan-card">
+        <div class="plan-head">
+          <h3>Drive Radio Free</h3>
+          <span class="plan-pill" data-i18n="plans_free_badge">Безплатно</span>
+        </div>
+        <ul class="plan-list">
+          <li data-i18n="plans_free_1">Автоматичен старт при Bluetooth връзка</li>
+          <li data-i18n="plans_free_2">Станции от България и света</li>
+          <li data-i18n="plans_free_3">Android Auto и управление от волана</li>
+          <li data-i18n="plans_free_4">Car Mode: часовник, температура и големи бутони за радиото</li>
+          <li data-i18n="plans_free_5">Таймер за заспиване и еквалайзер</li>
+          <li data-i18n="plans_free_6">До 10 любими станции</li>
+        </ul>
+      </div>
+      <div class="plan-card premium">
+        <div class="plan-head">
+          <h3>Drive Radio Premium</h3>
+          <span class="plan-pill" data-i18n="plans_price">1,99 € / месец</span>
+        </div>
+        <div class="plan-sub" data-i18n="plans_all_from_free">Всичко от Free, плюс:</div>
+        <ul class="plan-list">
+          <li data-i18n="plans_prem_1">Песен и обложка на екрана</li>
+          <li data-i18n="plans_prem_2">Песента в Spotify, YouTube, Deezer и Tidal</li>
+          <li data-i18n="plans_prem_3">Пълна история на слушането</li>
+          <li data-i18n="plans_prem_4">Любими без лимит, на всички устройства</li>
+          <li data-i18n="plans_prem_5">Автоматична навигация и бързи бутони в Car Mode (навигация, музика, телефон)</li>
+          <li data-i18n="plans_prem_6">Свой еквалайзер и екран, който не гасне</li>
+        </ul>
+        <p class="plan-year" data-i18n="plans_price_year">или 14,99 € на година</p>
       </div>
     </div>
   </section>
