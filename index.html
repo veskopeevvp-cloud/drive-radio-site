@@ -158,6 +158,8 @@
   .plan-list li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; font-size: 14.5px; line-height: 1.45; }
   .plan-list li::before { content: "\2713"; color: #4cd964; font-weight: 800; }
   .plan-card.premium .plan-list li::before { color: var(--orange); }
+  .plan-cta { display: flex; justify-content: center; width: 100%; margin-top: 22px; box-sizing: border-box; }
+  .plan-note { margin: 10px 0 0; color: var(--text-dim); font-size: 12.5px; text-align: center; }
   .plan-year { margin: 18px 0 0; padding-top: 14px; border-top: 1px dashed var(--border); color: var(--text-dim); font-size: 13.5px; }
 
   /* ---------- footer cta ---------- */
@@ -186,6 +188,7 @@
     </a>
     <nav>
       <a href="app.html" data-i18n="nav_app">За приложението</a>
+      <a href="#plans" data-i18n="nav_plans">Абонаменти</a>
       <a href="https://player.driveradio.app" data-i18n="nav_listen">Слушай онлайн</a>
       <div class="lang-toggle" data-lang-toggle>
         <button data-lang="bg" class="active">
@@ -209,6 +212,7 @@
         <img src="assets/google-play-badge.png" alt="Изтегли от Google Play" data-i18n-alt="download_badge_alt">
       </a>
       <a class="btn ghost" href="app.html" data-i18n="nav_app">За приложението</a>
+      <a class="btn ghost" href="#plans" data-i18n="nav_plans_arrow">Абонаменти ↓</a>
     </div>
 
     <div class="hero-shots">
@@ -276,6 +280,7 @@
           <li data-i18n="plans_free_5">Таймер за заспиване и еквалайзер</li>
           <li data-i18n="plans_free_6">До 10 любими станции</li>
         </ul>
+        <a class="btn ghost plan-cta" href="https://play.google.com/store/apps/details?id=bg.driveradio.app" data-i18n="plans_free_cta">Изтегли безплатно</a>
       </div>
       <div class="plan-card premium">
         <div class="plan-head">
@@ -292,6 +297,8 @@
           <li data-i18n="plans_prem_6">Свой еквалайзер и екран, който не гасне</li>
         </ul>
         <p class="plan-year" data-i18n="plans_price_year">или 14,99 € на година</p>
+        <a class="btn primary plan-cta" href="https://play.google.com/store/apps/details?id=bg.driveradio.app" data-i18n="plans_prem_cta">Вземи Premium в приложението</a>
+        <p class="plan-note" data-i18n="plans_note">Абонаментът се купува в приложението, през Google Play.</p>
       </div>
     </div>
   </section>

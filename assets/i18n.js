@@ -16,6 +16,11 @@
     download_badge_alt: { bg: 'Изтегли от Google Play', en: 'Get it on Google Play' },
 
     // plans section (index.html)
+    nav_plans: { bg: 'Абонаменти', en: 'Subscriptions' },
+    nav_plans_arrow: { bg: 'Абонаменти ↓', en: 'Subscriptions ↓' },
+    plans_free_cta: { bg: 'Изтегли безплатно', en: 'Download free' },
+    plans_prem_cta: { bg: 'Вземи Premium в приложението', en: 'Get Premium in the app' },
+    plans_note: { bg: 'Абонаментът се купува в приложението, през Google Play.', en: 'The subscription is bought inside the app, through Google Play.' },
     plans_eyebrow: { bg: 'Абонаменти', en: 'Subscriptions' },
     plans_h2: { bg: 'Започни безплатно', en: 'Start free' },
     plans_free_badge: { bg: 'Безплатно', en: 'Free' },
