@@ -13,6 +13,10 @@
     nav_listen: { bg: 'Слушай онлайн', en: 'Listen online' },
     nav_home: { bg: 'Начало', en: 'Home' },
     web_player: { bg: 'Уеб плеър', en: 'Web player' },
+    rights_notice: {
+      bg: 'Имената и логата на радиостанциите принадлежат на съответните им правоносители. Drive Radio е независимо приложение и не е официално свързано с радиостанциите, освен ако не е посочено друго. За въпроси относно съдържание, права или искания за премахване: <a href="mailto:info.driveradio@gmail.com">info.driveradio@gmail.com</a>',
+      en: 'Radio station names and logos belong to their respective rights holders. Drive Radio is an independent application and is not officially affiliated with the stations unless otherwise stated. For content, rights-related inquiries or removal requests: <a href="mailto:info.driveradio@gmail.com">info.driveradio@gmail.com</a>',
+    },
     download_badge_alt: { bg: 'Изтегли от Google Play', en: 'Get it on Google Play' },
 
     // plans section (index.html)
@@ -226,6 +230,11 @@
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var entry = dict[el.getAttribute('data-i18n')];
       if (entry) el.textContent = entry[l];
+    });
+    // Entries that contain a link (the rights notice); the dictionary is our own, trusted text.
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      var entry = dict[el.getAttribute('data-i18n-html')];
+      if (entry) el.innerHTML = entry[l];
     });
     document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
       var entry = dict[el.getAttribute('data-i18n-alt')];
