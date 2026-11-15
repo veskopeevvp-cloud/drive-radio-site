@@ -83,6 +83,10 @@
   .btn-web { height: 52px; padding: 0 22px 0 14px; border: 1.5px solid var(--orange); color: var(--text); }
   .btn-web .btn-icon { width: 26px; height: 26px; color: var(--orange); flex: none; }
   .btn-web:hover { background: rgba(255, 140, 26, 0.12); }
+  .btn-primary .btn-icon { width: 22px; height: 22px; color: var(--orange-ink); flex: none; }
+  .try-note { color: var(--dim) !important; font-size: 0.88rem; margin: 12px 0 0 !important; }
+  .try-link { display: inline-block; margin-top: 10px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
+  .try-link:hover { text-decoration: underline; }
   .gplay { display: inline-flex; align-items: center; border-radius: 10px; }
   .gplay img { height: 52px; width: auto; }
   .btn-soon { border: 1px dashed #4a4d52; color: var(--dim); cursor: default; }
@@ -352,12 +356,13 @@
             <span data-l="bg">На работа или вкъщи отваряш уеб плеъра в браузъра и слушаш същите станции. Търсиш по име, държава или стил, или поставяш адреса на потока. Работи на компютър и на телефон, включително iPhone, с бутони и на заключения екран.</span>
             <span data-l="en">At work or at home, open the web player in your browser and listen to the same stations. Search by name, country or style, or paste the stream address. It works on a computer and on a phone, iPhone included, with controls on the lock screen too.</span>
           </p>
-          <a class="btn btn-primary" href="https://player.driveradio.app/"><span data-l="bg">Отвори уеб плеъра</span><span data-l="en">Open the web player</span></a>
+          <a class="btn btn-primary" href="https://player.driveradio.app/"><svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M10 7.8v8.4l6.6-4.2z" fill="#ff8c1a"/></svg><span data-l="bg">Пробвай уеб плеъра</span><span data-l="en">Try the web player</span></a>
+          <p class="try-note"><span data-l="bg">Безплатно е – влизаш с Google или с имейл и слушаш.</span><span data-l="en">It's free – sign in with Google or e-mail and listen.</span></p>
         </div>
         <ul class="ticks">
           <li><span data-l="bg">Слушането е безплатно, а любимите се пазят в браузъра</span><span data-l="en">Listening is free, and your favorites are kept in the browser</span></li>
           <li><span data-l="bg">С Premium списъкът е общ с телефона: добавиш станция на едното място и тя се появява и на другото</span><span data-l="en">With Premium the list is shared with your phone: add a station in one place and it appears in the other</span></li>
-          <li><span data-l="bg">С Premium виждаш и песента, и историята на слушаните песни</span><span data-l="en">With Premium you also see the song and the history of what you listened to</span></li>
+          <li><span data-l="bg">Виждаш песента и обложката, а с Premium и историята на слушаните песни</span><span data-l="en">See the song and the cover, and with Premium the history of what you listened to</span></li>
           <li><span data-l="bg">Влизаш със същия профил като в приложението</span><span data-l="en">Sign in with the same account as in the app</span></li>
         </ul>
       </div>
@@ -373,6 +378,7 @@
           <span class="k">PREMIUM</span>
           <h3><span data-l="bg">История и синхронизация</span><span data-l="en">History and sync</span></h3>
           <p><span data-l="bg">Цялата история на чутите песни и любимите на всичките ти устройства и в уеб плеъра.</span><span data-l="en">The full history of songs you heard, and your favorites on all your devices and in the web player.</span></p>
+          <a class="try-link" href="https://player.driveradio.app/"><span data-l="bg">Пробвай уеб плеъра →</span><span data-l="en">Try the web player →</span></a>
         </div>
         <div class="feature">
           <span class="k">9 LANGUAGES</span>
