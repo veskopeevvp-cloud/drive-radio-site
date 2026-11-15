@@ -3,36 +3,639 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>Drive Radio — временно недостъпен</title>
+<title>Drive Studio</title>
+<meta name="description" content="Drive Radio: your radio starts on its own when the phone connects to the car. No tapping. Just drive.">
+<link rel="icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap">
 <style>
-  :root { --bg:#050505; --text:#f2f2f2; --dim:#9a9a9a; --orange:#ff8c1a; }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    display: flex; align-items: center; justify-content: center; padding: 24px;
+  :root {
+    --bg: #050505;
+    --panel: #0e0f11;
+    --line: #1d1f23;
+    --text: #f2f2f2;
+    --dim: #a0a3a8;
+    --orange: #ff8c1a;
+    --orange-ink: #1a0d00;
+    --radius: 14px;
   }
-  main { max-width: 520px; text-align: center; }
-  .mark { font-size: 1.6rem; font-weight: 800; letter-spacing: 0.01em; margin-bottom: 28px; }
-  .mark b { color: var(--orange); }
-  h1 { font-size: 1.5rem; margin: 0 0 12px; text-wrap: balance; }
-  p { color: var(--dim); line-height: 1.55; margin: 0 0 10px; }
-  .en { margin-top: 26px; padding-top: 22px; border-top: 1px solid #1c1c1c; }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
   a { color: var(--orange); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  /* Language: show only the active one */
+  [data-l] { display: none; }
+  html[lang="bg"] [data-l="bg"], html[lang="en"] [data-l="en"] { display: revert; }
+  html[lang="bg"] img[data-l="bg"], html[lang="en"] img[data-l="en"] { display: block; }
+  .dash-auto-intro { margin-top: 80px; max-width: 40em; }
+  @media (min-width: 620px) { .phones.three { grid-template-columns: repeat(3, 1fr); max-width: 900px; } }
+
+  header { border-bottom: 1px solid var(--line); }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+  .mark { font-weight: 800; font-size: 1.15rem; letter-spacing: 0.01em; text-decoration: none; color: var(--orange); }
+  .mark b { color: var(--text); }
+  nav { display: flex; align-items: center; gap: 22px; }
+  nav a { color: var(--dim); text-decoration: none; font-size: 0.95rem; }
+  nav a:hover { color: var(--text); }
+  .lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .lang button {
+    background: none; border: 0; color: var(--dim); font: inherit; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.06em; padding: 6px 12px; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--orange); color: var(--orange-ink); }
+  @media (max-width: 640px) { nav a { display: none; } }
+
+  .eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin: 0 0 12px; }
+  /* App names like the Drive Studio mark: "Drive" orange, name white */
+  .brand-name { margin: 0 0 12px; font-size: 1.25rem; font-weight: 800; color: var(--orange); letter-spacing: 0.01em; }
+  .brand-name b { color: var(--text); font-weight: 800; }
+  .brand-inline { color: var(--orange); }
+  .brand-inline b { color: var(--text); font-weight: inherit; }
+  h1, h2, h3 { line-height: 1.15; margin: 0; text-wrap: balance; }
+  h1 { font-size: clamp(2.2rem, 5.2vw, 3.6rem); font-weight: 800; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(1.7rem, 3.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.015em; }
+  h3 { font-size: 1.1rem; font-weight: 600; }
+  .lead { color: var(--dim); font-size: 1.15rem; max-width: 34em; margin: 18px 0 0; }
+
+  .hero { padding-top: 64px; padding-bottom: 40px; display: grid; gap: 40px; grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 900px) { .hero { grid-template-columns: 0.9fr 1.1fr; padding-top: 88px; padding-bottom: 56px; } }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 999px;
+    font-weight: 600; text-decoration: none; font-size: 1rem;
+  }
+  .btn-primary { background: var(--orange); color: var(--orange-ink); }
+  .btn-primary:hover { background: #ffa04a; }
+  .btn-ghost { border: 1px solid #33363b; color: var(--text); }
+  .btn-ghost:hover { border-color: var(--dim); }
+  .gplay { display: inline-flex; align-items: center; border-radius: 10px; }
+  .gplay img { height: 52px; width: auto; }
+  .btn-soon { border: 1px dashed #4a4d52; color: var(--dim); cursor: default; }
+  .note { color: var(--dim); font-size: 0.85rem; margin-top: 14px; }
+
+  .shot { border-radius: var(--radius); border: 1px solid var(--line); background: #000; overflow: hidden; }
+  .shot img { width: 100%; height: auto; }
+
+  section { padding: 56px 0; }
+  .divider { border-top: 1px solid var(--line); }
+
+  .features { display: grid; gap: 28px 40px; grid-template-columns: 1fr; margin-top: 36px; }
+  @media (min-width: 720px) { .features { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .features { grid-template-columns: repeat(3, 1fr); } }
+  .feature h3 { margin-bottom: 6px; }
+  .feature p { margin: 0; color: var(--dim); font-size: 0.98rem; }
+  .feature .k { display: block; font-variant-numeric: tabular-nums; color: var(--orange); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.08em; margin-bottom: 8px; }
+
+  .gallery { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 36px; }
+  @media (min-width: 820px) { .gallery { grid-template-columns: 1fr 1fr; } }
+  /* Feature rows: text beside a large screenshot, alternating sides */
+  .row { display: grid; gap: 32px; grid-template-columns: 1fr; align-items: center; margin-top: 72px; }
+  @media (min-width: 900px) {
+    .row { grid-template-columns: 0.9fr 1.1fr; gap: 56px; margin-top: 96px; }
+    .row.flip .row-text { order: 2; }
+  }
+  .row-text h3 { font-size: clamp(1.35rem, 2.4vw, 1.75rem); font-weight: 800; letter-spacing: -0.01em; margin-bottom: 14px; }
+  .row-text p { color: #c9ccd0; margin: 0; max-width: 34em; }
+  .row-text .k { display: block; color: var(--orange); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 10px; }
+  .ticks { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 8px; }
+  .ticks li { position: relative; padding-left: 26px; color: var(--dim); font-size: 0.97rem; }
+  .ticks li::before { content: ""; position: absolute; left: 2px; top: 0.45em; width: 11px; height: 6px; border-left: 2px solid var(--orange); border-bottom: 2px solid var(--orange); transform: rotate(-45deg); }
+  .row-media.phones-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 560px; justify-self: center; width: 100%; }
+  .row-media.phones-2 .shot { border-radius: 22px; }
+  .row-media.stack { display: grid; gap: 16px; }
+  /* Landscape navigation shot beside the same screen upright */
+  .row-media.nav-pair { display: grid; grid-template-columns: 1fr 0.36fr; gap: 16px; align-items: center; }
+  .row-media.nav-pair .shot:last-child { border-radius: 22px; }
+  .web-band {
+    margin-top: 96px; padding: 36px; border-radius: var(--radius);
+    background: var(--panel); border: 1px solid rgba(255, 140, 26, 0.35);
+    display: grid; gap: 28px 48px; grid-template-columns: 1fr; align-items: center;
+  }
+  @media (min-width: 900px) { .web-band { grid-template-columns: 1.1fr 0.9fr; padding: 44px 48px; } }
+  .web-band .k { display: block; color: var(--orange); font-weight: 800; font-size: 0.8rem; letter-spacing: 0.1em; margin-bottom: 10px; }
+  .web-band h3 { font-size: clamp(1.35rem, 2.4vw, 1.75rem); font-weight: 800; margin-bottom: 14px; }
+  .web-band p { color: #c9ccd0; margin: 0 0 24px; }
+  .web-band .ticks { margin: 0; }
+  .extras { margin-top: 96px; padding-top: 48px; border-top: 1px solid var(--line); }
+  .phones { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); margin-top: 44px; }
+  @media (min-width: 820px) { .phones { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+  .phones .shot { border-radius: 22px; }
+  figure { margin: 0; }
+  figcaption { color: var(--dim); font-size: 0.88rem; margin-top: 10px; }
+
+  .plans { display: grid; gap: 16px; grid-template-columns: 1fr; margin-top: 36px; }
+  @media (min-width: 820px) { .plans { grid-template-columns: 1fr 1fr; } }
+  .plan { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .plan.premium { border-color: rgba(255, 140, 26, 0.45); }
+  .plan h3 { font-size: 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: #1c1e22; color: var(--dim); }
+  .premium .tag { background: rgba(255, 140, 26, 0.15); color: var(--orange); }
+  .plan ul { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+  .plan li { padding-left: 24px; position: relative; color: #d6d8db; font-size: 0.97rem; }
+  .plan li::before { content: ""; position: absolute; left: 2px; top: 0.6em; width: 10px; height: 2px; background: var(--orange); }
+
+  .dashcam { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .soon { display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); border: 1px solid rgba(255,140,26,0.5); border-radius: 999px; padding: 4px 12px; margin-bottom: 14px; }
+  .dash-grid { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 900px) { .dash-grid { grid-template-columns: 0.85fr 1.15fr; } }
+  .dash-intro { max-width: 40em; }
+  .row-media.single-phone { max-width: 300px; justify-self: center; width: 100%; }
+  .row-media.single-phone .shot { border-radius: 22px; }
+  .plans-head { font-size: clamp(1.2rem, 2.2vw, 1.5rem); font-weight: 800; margin-top: 72px; max-width: 36em; }
+  .dashcam .plan { background: var(--bg); }
+  .dash-features { display: grid; gap: 20px 32px; grid-template-columns: 1fr; margin-top: 30px; }
+  @media (min-width: 620px) and (max-width: 899px) { .dash-features { grid-template-columns: 1fr 1fr; } }
+  .dash-features .feature p { font-size: 0.95rem; }
+  /* Portrait shot beside two stacked landscape shots; column widths make the
+     portrait as tall as the stack (portrait 600x1333, landscapes 1800x810). */
+  .dash-shots { display: grid; gap: 16px; grid-template-columns: 0.405fr 1fr; grid-template-rows: auto auto; }
+  .dash-shots .portrait { grid-row: span 2; border-radius: 22px; }
+  @media (max-width: 619px) {
+    .dash-shots { grid-template-columns: 1fr; }
+    .dash-shots .portrait { grid-row: auto; width: 62%; justify-self: center; }
+  }
+
+  footer { padding: 40px 0 56px; color: var(--dim); font-size: 0.9rem; }
+  .foot { display: grid; gap: 24px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .foot { grid-template-columns: 1.2fr 1fr 1fr; } }
+  footer h4 { color: var(--text); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 10px; }
+  footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  footer a { color: var(--dim); }
+  footer a:hover { color: var(--text); }
 </style>
 </head>
 <body>
-<main>
-  <div class="mark">Drive<b>Radio</b></div>
-  <h1>Временно недостъпен</h1>
-  <p>Drive Radio е временно недостъпен. Работим по обновление и ще се върнем скоро.</p>
-  <p>За въпроси: <a href="mailto:info.driveradio@gmail.com">info.driveradio@gmail.com</a></p>
-  <div class="en">
-    <h1>Temporarily unavailable</h1>
-    <p>Drive Radio is temporarily unavailable while we work on an update. We will be back soon.</p>
-    <p>Questions: <a href="mailto:info.driveradio@gmail.com">info.driveradio@gmail.com</a></p>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="#top">Drive <b>Studio</b></a>
+    <nav aria-label="Main">
+      <a href="#radio">Drive Radio</a>
+      <a href="#dashcam" hidden>Drive Dashcam</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-set-lang="bg" aria-pressed="true">BG</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
   </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ DRIVE RADIO ============ -->
+  <div class="wrap hero" id="radio">
+    <div>
+      <p class="brand-name">Drive <b>Radio</b></p>
+      <h1>
+        <span data-l="bg">Без докосване. Само карай.</span>
+        <span data-l="en">No tapping. Just drive.</span>
+      </h1>
+      <p class="lead">
+        <span data-l="bg">Качваш се, телефонът се свързва с колата и твоето радио тръгва само. Drive Radio се грижи музиката да е винаги с теб, без да се налага да мислиш за нея.</span>
+        <span data-l="en">Get in, your phone connects to the car and your radio starts on its own. Drive Radio keeps the music with you, without you having to think about it.</span>
+      </p>
+      <div class="actions">
+        <a class="gplay" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
+          <img data-l="bg" src="img/gplay-bg.png" width="646" height="192" alt="Изтеглете от Google Play">
+          <img data-l="en" src="img/gplay-en.png" width="564" height="168" alt="Get it on Google Play">
+        </a>
+        <a class="btn btn-ghost" href="https://player.driveradio.app/">
+          <span data-l="bg">Уеб плеър</span><span data-l="en">Web player</span>
+        </a>
+      </div>
+      <p class="note">
+        <span data-l="bg">Слушането е безплатно. Premium добавя удобства.</span>
+        <span data-l="en">Listening is free. Premium adds convenience.</span>
+      </p>
+    </div>
+    <div class="shot">
+      <img src="img/radio-player.jpg" width="1600" height="720" alt="Drive Radio player in landscape: clock, temperature, station cover and big buttons">
+    </div>
+  </div>
+
+  <section class="divider">
+    <div class="wrap">
+      <h2>
+        <span data-l="bg">Твоите радиа в твоята кола</span>
+        <span data-l="en">Your stations, in your car</span>
+      </h2>
+      <p class="lead">
+        <span data-l="bg">Drive Radio е направено за едно нещо: да слушаш любимите си станции в колата, без да докосваш телефона. Ето как.</span>
+        <span data-l="en">Drive Radio is built for one thing: listening to your favorite stations in the car without touching your phone. Here is how.</span>
+      </p>
+
+      <!-- Row 1: auto-start -->
+      <div class="row">
+        <div class="row-text">
+          <span class="k">BLUETOOTH</span>
+          <h3><span data-l="bg">Качваш се и радиото тръгва само</span><span data-l="en">Get in and the radio starts by itself</span></h3>
+          <p>
+            <span data-l="bg">Веднъж настройваш колата си и щом телефонът се свърже с нея по Bluetooth, Drive Radio прави това, което си избрал, и пуска последно слушаната станция. Не е нужно да отключваш телефона, да търсиш приложението или да натискаш Play.</span>
+            <span data-l="en">Set up your car once, and as soon as the phone connects to it over Bluetooth, Drive Radio does what you chose and plays the last station you listened to. No unlocking, no looking for the app, no pressing Play.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Работи и при заключен телефон</span><span data-l="en">Works with the phone locked</span></li>
+            <li><span data-l="bg">Едно устройство безплатно – кола, слушалки или колонка; повече с Premium</span><span data-l="en">One device for free – car, headphones or speaker; more with Premium</span></li>
+            <li><span data-l="bg">При слизане музиката спира сама</span><span data-l="en">When you get out, the music stops by itself</span></li>
+          </ul>
+        </div>
+        <div class="row-media">
+          <div class="shot"><img src="img/radio-player.jpg" width="1600" height="719" loading="lazy" alt="Drive Radio playing in landscape with a big clock and temperature"></div>
+        </div>
+      </div>
+
+      <!-- Row 2: add stations -->
+      <div class="row flip">
+        <div class="row-text">
+          <span class="k">STREAM</span>
+          <h3><span data-l="bg">Добавяш своите станции, както ти е удобно</span><span data-l="en">Add your stations the way you like</span></h3>
+          <p>
+            <span data-l="bg">Търсиш радио по име в каталог с хиляди станции от цял свят и филтрираш по държава. Ако станцията я няма, отваряш сайта ѝ във вградения браузър и натискаш Play: потокът се улавя автоматично. Можеш да поставиш и адреса на потока или цял списък наведнъж.</span>
+            <span data-l="en">Search by name in a catalog of thousands of stations from around the world and filter by country. If a station is not there, open its website in the built-in browser and press Play: the stream is picked up automatically. You can also paste the stream address or a whole list at once.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Без ограничение на любимите</span><span data-l="en">No limit on favorites</span></li>
+            <li><span data-l="bg">Подреждаш ги, както искаш</span><span data-l="en">Arrange them the way you want</span></li>
+            <li><span data-l="bg">Списък с адреси или M3U файл</span><span data-l="en">A list of addresses or an M3U file</span></li>
+          </ul>
+        </div>
+        <div class="row-media phones-2">
+          <div class="shot"><img data-l="bg" src="img/phone-search.jpg" width="600" height="1278" loading="lazy" alt="Searching radio stations by name and country"><img data-l="en" src="img/phone-search-en.jpg" width="600" height="1278" loading="lazy" alt="Searching radio stations by name and country"></div>
+          <div class="shot"><img data-l="bg" src="img/phone-add.jpg" width="600" height="1278" loading="lazy" alt="Adding a station from a website, a stream address or a list"><img data-l="en" src="img/phone-add-en.jpg" width="600" height="1278" loading="lazy" alt="Adding a station from a website, a stream address or a list"></div>
+        </div>
+      </div>
+
+      <!-- Row 3: song and cover -->
+      <div class="row">
+        <div class="row-text">
+          <span class="k">NOW PLAYING</span>
+          <h3><span data-l="bg">Знаеш какво звучи и го намираш с едно докосване</span><span data-l="en">Know what is playing and find it with one tap</span></h3>
+          <p>
+            <span data-l="bg">Под станцията виждаш изпълнителя, песента и обложката. Хареса ли ти, докосваш бутона и песента се отваря в любимата ти музикална платформа, където можеш да продължиш да я слушаш. Не успя да я видиш? Drive Radio помни всяка песен, която си слушал. Докосваш малкия часовник пред името на станцията и я намираш в историята.</span>
+            <span data-l="en">Under the station you see the artist, the song and the cover. Like it? Tap the button and the song opens in your favorite music platform, where you can keep listening to it. Missed it? Drive Radio remembers every song you listened to. Tap the small clock in front of the station name and find it in the history.</span>
+          </p>
+          <ul class="ticks">
+            <li>Spotify, YouTube Music, YouTube, Apple Music, Deezer, Tidal</li>
+            <li><span data-l="bg">Избираш платформата веднъж в настройките</span><span data-l="en">Pick your platform once in the settings</span></li>
+            <li><span data-l="bg">История: последните 3 песни безплатно, цялата история с търсене – с Premium</span><span data-l="en">History: the last 3 songs for free, the full searchable history with Premium</span></li>
+          </ul>
+        </div>
+        <div class="row-media phones-2">
+          <div class="shot"><img data-l="bg" src="img/phone-player.jpg" width="600" height="1278" loading="lazy" alt="Player showing the song, the cover and the list of favorites"><img data-l="en" src="img/phone-player-en.jpg" width="600" height="1278" loading="lazy" alt="Player showing the song, the cover and the list of favorites"></div>
+          <div class="shot"><img data-l="bg" src="img/phone-platforms.jpg" width="600" height="1278" loading="lazy" alt="Choosing the music platform for the song button"><img data-l="en" src="img/phone-platforms-en.jpg" width="600" height="1278" loading="lazy" alt="Choosing the music platform for the song button"></div>
+        </div>
+      </div>
+
+      <!-- Row 4: Car Mode -->
+      <div class="row flip">
+        <div class="row-text">
+          <span class="k">CAR MODE</span>
+          <h3><span data-l="bg">Екран, направен за колата</span><span data-l="en">A screen made for the car</span></h3>
+          <p>
+            <span data-l="bg">Сложиш ли телефона хоризонтално на стойката, Drive Radio показва голям часовник, температурата навън и големи бутони, които се натискат лесно в движение. Любимите станции са до плеъра, а с Premium, докато си свързан с колата, имаш и бързи бутони за навигация, музика и телефон.</span>
+            <span data-l="en">Put the phone in landscape on the mount and Drive Radio shows a big clock, the outside temperature and large buttons that are easy to hit while driving. Your favorites sit next to the player, and with Premium, while connected to the car, you also get quick buttons for navigation, music and phone.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Станциите се сменят и от бутоните на волана</span><span data-l="en">Change stations from the steering wheel buttons too</span></li>
+            <li><span data-l="bg">Работи с Android Auto</span><span data-l="en">Works with Android Auto</span></li>
+          </ul>
+        </div>
+        <div class="row-media stack">
+          <div class="shot"><img src="img/radio-carmode-buttons.jpg" width="1600" height="719" loading="lazy" alt="Car Mode with quick buttons for navigation, music and phone on the left"></div>
+          <div class="shot"><img src="img/radio-carmode-favorites.jpg" width="1600" height="719" loading="lazy" alt="Car Mode player next to the list of favorite stations"></div>
+        </div>
+      </div>
+
+      <!-- Row 5: trip recording + floating control over navigation -->
+      <div class="row">
+        <div class="row-text">
+          <span class="k">RECORDING · PREMIUM</span>
+          <h3><span data-l="bg">Слушаш и записваш пътя</span><span data-l="en">Listen and record the road</span></h3>
+          <p>
+            <span data-l="bg">Drive Radio може да записва пътя с камерата на телефона, докато свири радиото. Отвориш ли навигацията, над картата остават малкият бутон с песента и броячът REC. Управляваш музиката, без да излизаш от картата, а двете можеш да преместиш с пръст където ти е удобно, за да не закриват пътя.</span>
+            <span data-l="en">Drive Radio can record the road with the phone's camera while the radio plays. Open your navigation and a small song control and a REC counter stay on top of the map. You control the music without leaving the map, and you can drag both with your finger to wherever suits you, so they don't cover the road.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Пауза и следваща станция от плаващия бутон</span><span data-l="en">Pause and next station from the floating control</span></li>
+            <li><span data-l="bg">Записът може да тръгва сам, щом телефонът се свърже с колата</span><span data-l="en">Recording can start on its own when the phone connects to the car</span></li>
+            <li><span data-l="bg">При силен удар клипът се запазва сам</span><span data-l="en">After a hard impact, the clip is saved on its own</span></li>
+          </ul>
+        </div>
+        <div class="row-media nav-pair">
+          <div class="shot"><img src="img/radio-waze-wide.jpg" width="1600" height="719" loading="lazy" alt="Waze in landscape with the Drive Radio song control and REC counter on top"></div>
+          <div class="shot"><img src="img/radio-waze-tall.jpg" width="600" height="1278" loading="lazy" alt="Waze upright with the Drive Radio song control and REC counter on top"></div>
+        </div>
+      </div>
+
+      <!-- Web player -->
+      <div class="web-band">
+        <div>
+          <span class="k">WEB PLAYER</span>
+          <h3><span data-l="bg">Слушай и от компютъра</span><span data-l="en">Listen on your computer too</span></h3>
+          <p>
+            <span data-l="bg">На работа или вкъщи отваряш уеб плеъра в браузъра и слушаш същите станции. Търсиш по име, държава или стил, или поставяш адреса на потока. Работи на компютър и на телефон, включително iPhone, с бутони и на заключения екран.</span>
+            <span data-l="en">At work or at home, open the web player in your browser and listen to the same stations. Search by name, country or style, or paste the stream address. It works on a computer and on a phone, iPhone included, with controls on the lock screen too.</span>
+          </p>
+          <a class="btn btn-primary" href="https://player.driveradio.app/"><span data-l="bg">Отвори уеб плеъра</span><span data-l="en">Open the web player</span></a>
+        </div>
+        <ul class="ticks">
+          <li><span data-l="bg">Слушането е безплатно, а любимите се пазят в браузъра</span><span data-l="en">Listening is free, and your favorites are kept in the browser</span></li>
+          <li><span data-l="bg">С Premium списъкът е общ с телефона: добавиш станция на едното място и тя се появява и на другото</span><span data-l="en">With Premium the list is shared with your phone: add a station in one place and it appears in the other</span></li>
+          <li><span data-l="bg">С Premium виждаш и песента, и историята на слушаните песни</span><span data-l="en">With Premium you also see the song and the history of what you listened to</span></li>
+          <li><span data-l="bg">Влизаш със същия профил като в приложението</span><span data-l="en">Sign in with the same account as in the app</span></li>
+        </ul>
+      </div>
+
+      <!-- Small extras -->
+      <div class="features extras">
+        <div class="feature">
+          <span class="k">SLEEP · EQ</span>
+          <h3><span data-l="bg">Таймер и еквалайзер</span><span data-l="en">Timer and equalizer</span></h3>
+          <p><span data-l="bg">Таймер за сън и еквалайзер с готови настройки за звука.</span><span data-l="en">A sleep timer and an equalizer with ready-made sound presets.</span></p>
+        </div>
+        <div class="feature">
+          <span class="k">PREMIUM</span>
+          <h3><span data-l="bg">История и синхронизация</span><span data-l="en">History and sync</span></h3>
+          <p><span data-l="bg">Цялата история на чутите песни и любимите на всичките ти устройства и в уеб плеъра.</span><span data-l="en">The full history of songs you heard, and your favorites on all your devices and in the web player.</span></p>
+        </div>
+        <div class="feature">
+          <span class="k">9 LANGUAGES</span>
+          <h3><span data-l="bg">На твоя език</span><span data-l="en">In your language</span></h3>
+          <p><span data-l="bg">Български, английски, гръцки, румънски, сръбски, италиански, турски, руски и украински.</span><span data-l="en">Bulgarian, English, Greek, Romanian, Serbian, Italian, Turkish, Russian and Ukrainian.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="divider">
+    <div class="wrap">
+      <h2>
+        <span data-l="bg">Безплатно и Premium</span>
+        <span data-l="en">Free and Premium</span>
+      </h2>
+      <p class="lead">
+        <span data-l="bg">Слушането никога не е платено. Premium е за тези, които искат колата да прави още повече сама.</span>
+        <span data-l="en">Listening is never paid. Premium is for drivers who want the car to do even more on its own.</span>
+      </p>
+      <div class="plans">
+        <div class="plan">
+          <h3><span class="brand-inline">Drive <b>Radio</b></span> <span class="tag"><span data-l="bg">Безплатно</span><span data-l="en">Free</span></span></h3>
+          <ul>
+            <li><span data-l="bg">Твоите станции, без ограничение</span><span data-l="en">Your stations, no limit</span></li>
+            <li><span data-l="bg">Автоматичен старт с едно Bluetooth устройство</span><span data-l="en">Auto-start with one Bluetooth device</span></li>
+            <li><span data-l="bg">Песен, обложка и бутони за Spotify, YouTube и други</span><span data-l="en">Song, cover and buttons for Spotify, YouTube and more</span></li>
+            <li><span data-l="bg">Car Mode, Android Auto и бутони на волана</span><span data-l="en">Car Mode, Android Auto and steering wheel buttons</span></li>
+            <li><span data-l="bg">Таймер за сън и еквалайзер</span><span data-l="en">Sleep timer and equalizer</span></li>
+            <li><span data-l="bg">История на песните – виждаш последните 3, които си слушал</span><span data-l="en">Song history – see the last 3 songs you listened to</span></li>
+          </ul>
+        </div>
+        <div class="plan premium">
+          <h3><span class="brand-inline">Drive <b>Radio</b></span> <span class="tag">Premium</span></h3>
+          <ul>
+            <li><span data-l="bg">Повече от едно Bluetooth устройство</span><span data-l="en">More than one Bluetooth device</span></li>
+            <li><span data-l="bg">Навигацията се отваря сама при качване</span><span data-l="en">Navigation opens by itself when you get in</span></li>
+            <li><span data-l="bg">Плаващ контрол над навигацията</span><span data-l="en">Floating control over your navigation</span></li>
+            <li><span data-l="bg">Записване на пътя с видео</span><span data-l="en">Trip Recording with video</span></li>
+            <li><span data-l="bg">Любимите на всички устройства и в уеб плеъра</span><span data-l="en">Favorites on all your devices and in the web player</span></li>
+            <li><span data-l="bg">Цялата история на песните, които си слушал, с търсене</span><span data-l="en">The full history of songs you listened to, with search</span></li>
+            <li><span data-l="bg">Собствени настройки на еквалайзера</span><span data-l="en">Your own equalizer presets</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DRIVE DASHCAM ============ -->
+  <!-- Drive Dashcam: hidden until the app is live on Google Play. Remove "hidden" here, in the nav and in the footer to show it. -->
+  <section class="dashcam" id="dashcam" hidden>
+    <div class="wrap">
+      <div class="dash-intro">
+        <span class="soon"><span data-l="bg">Скоро в Google Play</span><span data-l="en">Coming soon to Google Play</span></span>
+        <p class="brand-name">Drive <b>Dashcam</b></p>
+        <h2>
+          <span data-l="bg">Видеорегистратор в телефона</span>
+          <span data-l="en">A dash cam in your phone</span>
+        </h2>
+        <p class="lead">
+          <span data-l="bg">Видеорегистратор, който тръгва сам, щом се качиш в колата. Без реклами, а видеото остава на телефона ти.</span>
+          <span data-l="en">A dash cam that starts on its own when you get in the car. No ads, and the video stays on your phone.</span>
+        </p>
+        <div class="actions">
+          <span class="btn btn-soon"><span data-l="bg">Скоро в Google Play</span><span data-l="en">Coming soon to Google Play</span></span>
+        </div>
+      </div>
+
+      <!-- Row 1: recording -->
+      <div class="row">
+        <div class="row-text">
+          <span class="k">RECORDING</span>
+          <h3><span data-l="bg">Всичко важно е върху видеото</span><span data-l="en">Everything that matters, on the video</span></h3>
+          <p>
+            <span data-l="bg">Телефонът става видеорегистратор, който записва пътя на кратки клипове. Върху всеки кадър се виждат скоростта, датата, часът, координатите и улицата. Когато мястото свърши, най-старите клипове се изтриват сами, а колко място да заемат записите избираш ти. Ако телефонът започне да се затопля, качеството се намалява само, за да продължи записът.</span>
+            <span data-l="en">Your phone becomes a dash cam that records the road in short clips. Every frame shows the speed, date, time, coordinates and street. When space runs out, the oldest clips are removed on their own, and you choose how much space recordings may use. If the phone starts to heat up, quality is lowered automatically so recording can go on.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Хоризонтално или вертикално – екранът се завърта с телефона</span><span data-l="en">Landscape or upright – the screen turns with the phone</span></li>
+            <li><span data-l="bg">Бърза снимка и изключване на микрофона с едно докосване</span><span data-l="en">Quick photo and mic off with one tap</span></li>
+            <li><span data-l="bg">Пауза, когато колата стои дълго, и продължава, щом потеглиш</span><span data-l="en">Pauses when the car stands still for a long time, resumes when you drive off</span></li>
+          </ul>
+        </div>
+        <div class="row-media stack">
+          <div class="shot"><img src="img/dashcam-road.jpg" width="1800" height="810" loading="lazy" alt="Drive Dashcam recording on a city bridge, with speed, time and place on the video"></div>
+          <div class="shot"><img src="img/dashcam-radio.jpg" width="1800" height="810" loading="lazy" alt="Drive Dashcam recording in town with the Drive Radio floating music control on top"></div>
+        </div>
+      </div>
+
+      <!-- Row 2: bluetooth -->
+      <div class="row flip">
+        <div class="row-text">
+          <span class="k">BLUETOOTH</span>
+          <h3><span data-l="bg">Качваш се и записът тръгва</span><span data-l="en">Get in and recording starts</span></h3>
+          <p>
+            <span data-l="bg">Избираш колата веднъж от списъка с Bluetooth устройства. Щом телефонът се свърже с нея, записът започва, а когато слезеш, изчаква 5, 15 или 30 секунди и спира. Кратко прекъсване на Bluetooth не спира записа. С Premium при свързване се отварят и навигацията, и музиката – ти избираш кое приложение е на екрана и кое остава във фона.</span>
+            <span data-l="en">You pick your car once from the list of Bluetooth devices. When the phone connects to it, recording starts; when you get out, it waits 5, 15 or 30 seconds and stops. A short Bluetooth drop doesn't stop the recording. With Premium, navigation and music open on connect too – you choose which app is on screen and which stays in the background.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Сила на звука по твой избор при свързване (Premium)</span><span data-l="en">The volume of your choice on connect (Premium)</span></li>
+            <li><span data-l="bg">Екранът не гасне, докато си свързан с колата (Premium)</span><span data-l="en">Screen stays on while connected to the car (Premium)</span></li>
+            <li><span data-l="bg">При слизане музиката спира и приложенията се затварят</span><span data-l="en">When you get out, the music stops and the apps close</span></li>
+          </ul>
+        </div>
+        <div class="row-media phones-2">
+          <div class="shot">
+            <img data-l="bg" src="img/dash-auto-bg.jpg" width="600" height="1278" loading="lazy" alt="Настройки на колата: запис, навигация на екрана, музика във фона">
+            <img data-l="en" src="img/dash-auto-en.jpg" width="600" height="1278" loading="lazy" alt="Car settings: record video, navigation on screen, music in the background">
+          </div>
+          <div class="shot">
+            <img data-l="bg" src="img/dash-extras-bg.jpg" width="600" height="1278" loading="lazy" alt="Сила на звука, буден екран и действия при слизане">
+            <img data-l="en" src="img/dash-extras-en.jpg" width="600" height="1278" loading="lazy" alt="Volume on connect, keep screen awake and what happens on disconnect">
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: protection -->
+      <div class="row">
+        <div class="row-text">
+          <span class="k">PROTECTION</span>
+          <h3><span data-l="bg">Важният клип остава</span><span data-l="en">The clip that matters stays</span></h3>
+          <p>
+            <span data-l="bg">При силен удар клипът се запазва сам, заедно със следващия, за да не се изгуби нищо от случилото се. Ако видиш нещо, което искаш да пазиш, докосваш щита и клипът е защитен. Защитените клипове не се изтриват при презаписване – само ти можеш да ги махнеш.</span>
+            <span data-l="en">After a hard impact, the clip is saved on its own, together with the next one, so nothing of what happened is lost. If you see something you want to keep, you tap the shield and the clip is protected. Protected clips are never overwritten – only you can remove them.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Чувствителност на удара: ниска, средна или висока</span><span data-l="en">Impact sensitivity: low, medium or high</span></li>
+            <li><span data-l="bg">Кратка вибрация, когато клипът е защитен</span><span data-l="en">A short buzz when a clip is protected</span></li>
+            <li><span data-l="bg">Защитените клипове са отбелязани в записите</span><span data-l="en">Protected clips are marked in your recordings</span></li>
+          </ul>
+        </div>
+        <div class="row-media single-phone">
+          <div class="shot"><img src="img/dashcam-portrait.jpg" width="600" height="1333" loading="lazy" alt="Drive Dashcam recording upright, with the shield button to protect the clip"></div>
+        </div>
+      </div>
+
+      <!-- Row 4: navigation -->
+      <div class="row flip">
+        <div class="row-text">
+          <span class="k">NAVIGATION</span>
+          <h3><span data-l="bg">Записва, докато ползваш навигация</span><span data-l="en">Keeps recording while you navigate</span></h3>
+          <p>
+            <span data-l="bg">Отвориш ли Waze или Google Maps, записът продължава. Ти избираш как да виждаш, че тече: малък брояч REC над навигацията, малко прозорче с картината или камерата да остане на екрана. С Drive Radio управляваш музиката от плаващия ѝ бутон, без да напускаш записа.</span>
+            <span data-l="en">Open Waze or Google Maps and recording carries on. You choose how to see that it's running: a small REC counter over the navigation, a small picture window, or the camera staying on screen. With Drive Radio, you control the music from its floating button without leaving the recording.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Брояч над всичко или прозорче – по твой избор</span><span data-l="en">A counter over everything, or a small window – your choice</span></li>
+            <li><span data-l="bg">Работи с Drive Radio, Spotify и други плейъри</span><span data-l="en">Works with Drive Radio, Spotify and other players</span></li>
+            <li><span data-l="bg">Видеото остава на телефона – нищо не се качва</span><span data-l="en">The video stays on your phone – nothing is uploaded</span></li>
+          </ul>
+        </div>
+        <div class="row-media stack">
+          <figure>
+            <div class="shot"><img src="img/nav-pip.jpg" width="1600" height="800" loading="lazy" alt="Waze on full screen with the Drive Dashcam recording in a small window in the corner"></div>
+            <figcaption><span data-l="bg">Малко прозорче – виждаш пътя, докато навигацията е на целия екран.</span><span data-l="en">Small window – you still see the road while navigation fills the screen.</span></figcaption>
+          </figure>
+          <figure>
+            <div class="shot"><img src="img/nav-counter.jpg" width="1200" height="496" loading="lazy" alt="Waze map with a small Drive Dashcam REC counter floating on top"></div>
+            <figcaption><span data-l="bg">Малък брояч REC – навигацията остава цялата, а ти знаеш, че записът тече.</span><span data-l="en">Tiny REC counter – the navigation stays whole, and you know recording is on.</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Row 5: trips -->
+      <div class="row">
+        <div class="row-text">
+          <span class="k">TRIPS</span>
+          <h3><span data-l="bg">Всяко пътуване на картата</span><span data-l="en">Every trip on the map</span></h3>
+          <p>
+            <span data-l="bg">Клиповете се подреждат по пътувания – с разстояние, средна и максимална скорост. Маршрутът е на картата, оцветен по скорост, а отдолу има графика. Докосваш място от пътя и клипът тръгва точно от тази секунда, а цялото пътуване върви като едно видео.</span>
+            <span data-l="en">Clips are grouped into trips, with distance, average and top speed. The route is on the map, coloured by speed, with a graph below. Tap a spot on the route and the clip plays from that exact second, and the whole trip plays as one video.</span>
+          </p>
+          <ul class="ticks">
+            <li><span data-l="bg">Споделяш клип или го запазваш в галерията</span><span data-l="en">Share a clip or save it to your gallery</span></li>
+            <li><span data-l="bg">Изрязваш само важните секунди (Premium)</span><span data-l="en">Cut just the seconds that matter (Premium)</span></li>
+            <li><span data-l="bg">Дневник на пробега за Excel и маршрут за Google Earth и Strava (Premium)</span><span data-l="en">Mileage log for Excel, and routes for Google Earth and Strava (Premium)</span></li>
+          </ul>
+        </div>
+        <div class="row-media single-phone">
+          <div class="shot"><img src="img/dash-map.jpg" width="600" height="1278" loading="lazy" alt="Trip on the map with start, end, top speed and a speed graph"></div>
+        </div>
+      </div>
+
+      <h3 class="plans-head">
+        <span data-l="bg">Записът и защитата са безплатни. Premium прави колата още по-самостоятелна.</span>
+        <span data-l="en">Recording and protection are free. Premium lets the car do even more on its own.</span>
+      </h3>
+      <div class="plans">
+        <div class="plan">
+          <h3><span class="brand-inline">Drive <b>Dashcam</b></span> <span class="tag"><span data-l="bg">Безплатно</span><span data-l="en">Free</span></span></h3>
+          <ul>
+            <li><span data-l="bg">Тръгва сам – при свързване с колата по Bluetooth записът започва, при слизане спира.</span><span data-l="en">Starts on its own – recording begins when the phone connects to the car over Bluetooth and stops when you leave.</span></li>
+            <li><span data-l="bg">Пази важното – при удар или с едно докосване клипът се запазва и не се изтрива.</span><span data-l="en">Keeps what matters – after an impact, or with one tap, the clip is saved and never deleted.</span></li>
+            <li><span data-l="bg">Скорост, час и място върху видеото.</span><span data-l="en">Speed, time and location on the video.</span></li>
+            <li><span data-l="bg">Всяко пътуване на картата – докоснеш място и клипът тръгва оттам.</span><span data-l="en">Every trip on the map – tap a spot and the clip plays from there.</span></li>
+            <li><span data-l="bg">Не ти пречи – докато ползваш навигация, записва в малко прозорче или като малък брояч.</span><span data-l="en">Stays out of the way – while you navigate, it records in a small window or as a tiny counter.</span></li>
+            <li><span data-l="bg">Записва непрекъснато – най-старите клипове се изтриват сами, когато мястото свърши.</span><span data-l="en">Records non-stop – the oldest clips are removed on their own when space runs out.</span></li>
+          </ul>
+        </div>
+        <div class="plan premium">
+          <h3><span class="brand-inline">Drive <b>Dashcam</b></span> <span class="tag">Premium</span></h3>
+          <ul>
+            <li><span data-l="bg">Отваря сам музиката и навигацията при свързване, със сила на звука</span><span data-l="en">Opens your music and navigation on connect, with the volume set</span></li>
+            <li><span data-l="bg">Повече от една кола</span><span data-l="en">More than one car</span></li>
+            <li><span data-l="bg">Изрязваш и споделяш само важните секунди</span><span data-l="en">Cut and share just the seconds that matter</span></li>
+            <li><span data-l="bg">Дневник на пробега с износ за Excel и маршрут за Google Earth и Strava</span><span data-l="en">Mileage log with Excel export, and routes for Google Earth and Strava</span></li>
+            <li><span data-l="bg">Свой надпис върху видеото, например номера на колата</span><span data-l="en">Your own text on the video, e.g. the car's plate</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="mark" href="#top">Drive <b>Studio</b></a>
+      <p>
+        <span data-l="bg">Приложения за колата, които тръгват сами и не ти пречат.</span>
+        <span data-l="en">Apps for the car that start on their own and stay out of your way.</span>
+      </p>
+      <p><a href="mailto:info.driveradio@gmail.com">info.driveradio@gmail.com</a></p>
+    </div>
+    <div>
+      <h4 class="brand-inline">Drive <b>Radio</b></h4>
+      <ul>
+        <li><a href="https://play.google.com/store/apps/details?id=bg.driveradio.app">Google Play</a></li>
+        <li><a href="https://player.driveradio.app/"><span data-l="bg">Уеб плеър</span><span data-l="en">Web player</span></a></li>
+        <li><a href="https://player.driveradio.app/privacy-policy.html"><span data-l="bg">Поверителност</span><span data-l="en">Privacy</span></a></li>
+        <li><a href="https://player.driveradio.app/terms.html"><span data-l="bg">Условия</span><span data-l="en">Terms</span></a></li>
+        <li><a href="https://player.driveradio.app/privacy-policy.html#delete"><span data-l="bg">Изтриване на профила</span><span data-l="en">Delete account</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="brand-inline" hidden>Drive <b>Dashcam</b></h4>
+      <ul hidden>
+        <li><a href="https://player.driveradio.app/dashcam/privacy-policy.html"><span data-l="bg">Поверителност</span><span data-l="en">Privacy</span></a></li>
+        <li><a href="https://player.driveradio.app/dashcam/terms.html"><span data-l="bg">Условия</span><span data-l="en">Terms</span></a></li>
+        <li><a href="https://player.driveradio.app/dashcam/delete-account.html"><span data-l="bg">Изтриване на профила</span><span data-l="en">Delete account</span></a></li>
+      </ul>
+      <p style="margin-top:22px">© 2026 Drive Studio</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var KEY = 'driveStudioLang';
+    function apply(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
+      });
+    }
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    var guess = (navigator.language || 'en').toLowerCase().indexOf('bg') === 0 ? 'bg' : 'en';
+    apply(saved === 'bg' || saved === 'en' ? saved : guess);
+    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var lang = b.getAttribute('data-set-lang');
+        apply(lang);
+        try { localStorage.setItem(KEY, lang); } catch (e) {}
+      });
+    });
+  })();
+</script>
 </body>
 </html>
