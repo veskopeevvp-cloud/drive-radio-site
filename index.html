@@ -79,6 +79,10 @@
   .btn-primary:hover { background: #ffa04a; }
   .btn-ghost { border: 1px solid #33363b; color: var(--text); }
   .btn-ghost:hover { border-color: var(--dim); }
+  /* Web player: orange outline + play icon, same height as the Play badge */
+  .btn-web { height: 52px; padding: 0 22px 0 14px; border: 1.5px solid var(--orange); color: var(--text); }
+  .btn-web .btn-icon { width: 26px; height: 26px; color: var(--orange); flex: none; }
+  .btn-web:hover { background: rgba(255, 140, 26, 0.12); }
   .gplay { display: inline-flex; align-items: center; border-radius: 10px; }
   .gplay img { height: 52px; width: auto; }
   .btn-soon { border: 1px dashed #4a4d52; color: var(--dim); cursor: default; }
@@ -210,7 +214,8 @@
           <img data-l="bg" src="img/gplay-bg.png" width="646" height="192" alt="Изтеглете от Google Play">
           <img data-l="en" src="img/gplay-en.png" width="564" height="168" alt="Get it on Google Play">
         </a>
-        <a class="btn btn-ghost" href="https://player.driveradio.app/">
+        <a class="btn btn-web" href="https://player.driveradio.app/">
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M10 7.8v8.4l6.6-4.2z" fill="#050505"/></svg>
           <span data-l="bg">Уеб плеър</span><span data-l="en">Web player</span>
         </a>
       </div>
