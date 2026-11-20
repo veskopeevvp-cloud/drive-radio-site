@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://driveradio.app/</loc><lastmod>2026-11-15</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://driveradio.app/</loc><lastmod>2026-11-20</lastmod></url>
+  <url>
+    <loc>https://driveradio.app/radio-v-kolata/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://driveradio.app/radio-v-kolata/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://driveradio.app/en/radio-starts-automatically-in-car/"/>
+  </url>
+  <url>
+    <loc>https://driveradio.app/en/radio-starts-automatically-in-car/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://driveradio.app/radio-v-kolata/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://driveradio.app/en/radio-starts-automatically-in-car/"/>
+  </url>
+  <url>
+    <loc>https://driveradio.app/android-auto-radio/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://driveradio.app/android-auto-radio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://driveradio.app/en/internet-radio-android-auto/"/>
+  </url>
+  <url>
+    <loc>https://driveradio.app/en/internet-radio-android-auto/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://driveradio.app/android-auto-radio/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://driveradio.app/en/internet-radio-android-auto/"/>
+  </url>
+  <url>
+    <loc>https://driveradio.app/bulgarski-radia/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://driveradio.app/bulgarski-radia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://driveradio.app/en/bulgarian-radio-online-in-car/"/>
+  </url>
+  <url>
+    <loc>https://driveradio.app/en/bulgarian-radio-online-in-car/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="bg" href="https://driveradio.app/bulgarski-radia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://driveradio.app/en/bulgarian-radio-online-in-car/"/>
+  </url>
 </urlset>
