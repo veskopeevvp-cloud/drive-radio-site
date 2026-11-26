@@ -52,8 +52,8 @@ PAGES = {
         'OG_DESCRIPTION': 'Get in, your phone connects to the car and your radio starts by itself.',
         'PLAY': play('home_en'),
         'PLAYER': 'https://player.driveradio.app/?lang=en',
-        'VIDEO_ID': '',  # English Short not uploaded yet
-        'VIDEO_URL': '',
+        'VIDEO_ID': 'qOX-3EwZtns',
+        'VIDEO_URL': 'https://youtube.com/shorts/qOX-3EwZtns',
         'VIDEO_POSTER': '/img/short-car-en.jpg',
         'VIDEO_LABEL': 'Play the video: Drive Radio in a real car',
         'BG_CURRENT': 'false',
