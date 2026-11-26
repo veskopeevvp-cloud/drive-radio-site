@@ -130,6 +130,22 @@
   .shot { border-radius: var(--radius); border: 1px solid var(--line); background: #000; overflow: hidden; }
   .shot img { width: 100%; height: auto; }
 
+  /* Real-car video: a still with a play button; the YouTube player loads only on click */
+  .real-car { display: grid; gap: 32px; align-items: center; }
+  @media (min-width: 900px) { .real-car { grid-template-columns: 1.2fr 0.8fr; } }
+  .real-car .note a { font-weight: 600; text-decoration: none; }
+  .real-car .note a:hover { text-decoration: underline; }
+  .yt-wrap { width: 100%; max-width: 340px; aspect-ratio: 9 / 16; justify-self: center; position: relative;
+    border-radius: var(--radius); border: 1px solid var(--line); background: #000; overflow: hidden; }
+  .yt-facade { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
+  .yt-facade img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .yt-facade .play { position: absolute; left: 50%; top: 50%; width: 78px; height: 78px; margin: -39px 0 0 -39px; border-radius: 50%;
+    background: var(--orange); display: grid; place-items: center; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55); transition: transform 0.15s; }
+  .yt-facade .play svg { width: 34px; height: 34px; margin-left: 5px; fill: var(--orange-ink); }
+  .yt-facade:hover .play, .yt-facade:focus-visible .play { transform: scale(1.08); }
+  .yt-facade:focus-visible { outline: 3px solid var(--orange); outline-offset: -3px; }
+  .yt-wrap iframe { display: block; width: 100%; height: 100%; border: 0; }
+
   section { padding: 56px 0; }
   .divider { border-top: 1px solid var(--line); }
 
@@ -268,6 +284,30 @@
       <img src="/img/radio-player.jpg" width="1600" height="720" alt="Drive Radio player in landscape: clock, temperature, station cover and big buttons">
     </div>
   </div>
+
+  <section class="divider" id="video" {{VIDEO_HIDDEN}}>
+    <div class="wrap real-car">
+      <div>
+        <h2>
+          <span data-l="bg">Виж го в истинска кола</span>
+          <span data-l="en">See it in a real car</span>
+        </h2>
+        <p class="lead">
+          <span data-l="bg">Заснето с телефон, без нищо ускорено. Палиш колата и радиото стартира само, после и навигацията. Сменяш станцията от екрана на колата, а когато гасиш, всичко спира само.</span>
+          <span data-l="en">Filmed on a phone, nothing sped up. Start the car and the radio starts by itself, then the navigation. Change the station from the car's own screen, and when you turn the car off, everything stops by itself.</span>
+        </p>
+        <p class="note">
+          <a href="{{VIDEO_URL}}" target="_blank" rel="noopener"><span data-l="bg">Гледай в YouTube ↗</span><span data-l="en">Watch on YouTube ↗</span></a>
+        </p>
+      </div>
+      <div class="yt-wrap">
+        <button type="button" class="yt-facade" data-yt="{{VIDEO_ID}}" aria-label="{{VIDEO_LABEL}}">
+          <img src="{{VIDEO_POSTER}}" width="540" height="960" loading="lazy" alt="">
+          <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+      </div>
+    </div>
+  </section>
 
   <section class="divider">
     <div class="wrap">
@@ -676,6 +716,21 @@
     </p>
   </div>
 </footer>
+
+<script>
+  // The YouTube player (youtube-nocookie) loads only when the visitor presses play,
+  // so the page stays fast and nothing from YouTube loads for people who don't watch.
+  document.querySelectorAll('.yt-facade').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-yt') + '?autoplay=1&playsinline=1&rel=0';
+      f.title = b.getAttribute('aria-label');
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      b.replaceWith(f);
+    });
+  });
+</script>
 
 </body>
 </html>

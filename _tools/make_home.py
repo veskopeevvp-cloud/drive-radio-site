@@ -33,6 +33,11 @@ PAGES = {
         'OG_DESCRIPTION': 'Качваш се, телефонът се свързва с колата и твоето радио стартира само.',
         'PLAY': play('home_bg'),
         'PLAYER': 'https://player.driveradio.app/?lang=bg',
+        # Real-car Short (YouTube): empty VIDEO_ID hides the section on that page
+        'VIDEO_ID': '-r-MTbUttYo',
+        'VIDEO_URL': 'https://youtube.com/shorts/-r-MTbUttYo',
+        'VIDEO_POSTER': '/img/short-car-bg.jpg',
+        'VIDEO_LABEL': 'Пусни видеото: Drive Radio в истинска кола',
         'BG_CURRENT': 'true',
         'EN_CURRENT': 'false',
     },
@@ -47,12 +52,17 @@ PAGES = {
         'OG_DESCRIPTION': 'Get in, your phone connects to the car and your radio starts by itself.',
         'PLAY': play('home_en'),
         'PLAYER': 'https://player.driveradio.app/?lang=en',
+        'VIDEO_ID': '',  # English Short not uploaded yet
+        'VIDEO_URL': '',
+        'VIDEO_POSTER': '/img/short-car-en.jpg',
+        'VIDEO_LABEL': 'Play the video: Drive Radio in a real car',
         'BG_CURRENT': 'false',
         'EN_CURRENT': 'true',
     },
 }
 
 for key, page in PAGES.items():
+    page['VIDEO_HIDDEN'] = '' if page['VIDEO_ID'] else 'hidden'
     html = SRC
     for name, value in page.items():
         if name == 'out':
