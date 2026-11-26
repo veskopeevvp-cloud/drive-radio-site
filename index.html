@@ -173,6 +173,7 @@
   .row-media.phones-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 560px; justify-self: center; width: 100%; }
   .row-media.phones-2 .shot { border-radius: 22px; }
   .row-media.stack { display: grid; gap: 16px; }
+  .shot-cap { color: var(--dim); font-size: 0.85rem; margin: 8px 2px 0; }
   /* Landscape navigation shot beside the same screen upright */
   .row-media.nav-pair { display: grid; grid-template-columns: 1fr 0.36fr; gap: 16px; align-items: center; }
   .row-media.nav-pair .shot:last-child { border-radius: 22px; }
@@ -398,7 +399,10 @@
         </div>
         <div class="row-media stack">
           <div class="shot"><img src="/img/radio-carmode-buttons.jpg" width="1600" height="719" loading="lazy" alt="Car Mode with quick buttons for navigation, music and phone on the left"></div>
-          <div class="shot"><img src="/img/radio-carmode-favorites.jpg" width="1600" height="719" loading="lazy" alt="Car Mode player next to the list of favorite stations"></div>
+          <div>
+            <div class="shot"><img src="/img/android-auto-player.jpg" width="1596" height="614" loading="lazy" alt="Drive Radio in Android Auto: Waze on the left, the song with its cover and the buttons on the right"></div>
+            <p class="shot-cap"><span data-l="bg">С Android Auto: на екрана на колата, до навигацията.</span><span data-l="en">With Android Auto: on the car's screen, next to navigation.</span></p>
+          </div>
         </div>
       </div>
 
