@@ -4,10 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Drive Radio – онлайн радио, което стартира само в колата</title>
-<meta name="description" content="Drive Radio: your radio starts on its own when the phone connects to the car. No tapping. Just drive.">
-<link rel="icon" href="img/icon.png">
+<meta name="description" content="С Drive Radio твоето онлайн радио стартира само, щом телефонът се свърже с колата по Bluetooth. Работи и при заключен телефон, с Android Auto и бутоните на волана. Слушането е безплатно.">
+<link rel="canonical" href="https://driveradio.app/">
+<link rel="alternate" hreflang="bg" href="https://driveradio.app/">
+<link rel="alternate" hreflang="en" href="https://driveradio.app/en/">
+<link rel="alternate" hreflang="x-default" href="https://driveradio.app/en/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Drive Radio",
+  "operatingSystem": "Android",
+  "applicationCategory": "MultimediaApplication",
+  "inLanguage": "bg",
+  "description": "С Drive Radio твоето онлайн радио стартира само, щом телефонът се свърже с колата по Bluetooth. Работи и при заключен телефон, с Android Auto и бутоните на волана. Слушането е безплатно.",
+  "url": "https://driveradio.app/",
+  "installUrl": "https://play.google.com/store/apps/details?id=bg.driveradio.app",
+  "image": "https://driveradio.app/img/icon.png",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "publisher": { "@type": "Organization", "name": "Drive Studio", "url": "https://driveradio.app/", "email": "info.driveradio@gmail.com" }
+}
+</script>
+<link rel="icon" href="/img/icon.png">
 <!-- Link previews (Viber, Messenger, Facebook...): our icon, not a random screenshot -->
 <meta property="og:type" content="website">
+<meta property="og:locale" content="bg_BG">
 <meta property="og:url" content="https://driveradio.app/">
 <meta property="og:site_name" content="Drive Studio">
 <meta property="og:title" content="Drive Radio – Без докосване. Само карай.">
@@ -60,11 +81,12 @@
   nav a { color: var(--dim); text-decoration: none; font-size: 0.95rem; }
   nav a:hover { color: var(--text); }
   .lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
-  .lang button {
-    background: none; border: 0; color: var(--dim); font: inherit; font-size: 0.8rem; font-weight: 600;
-    letter-spacing: 0.06em; padding: 6px 12px; cursor: pointer;
+  .lang a {
+    display: inline-block; color: var(--dim); text-decoration: none; font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.06em; padding: 6px 12px;
   }
-  .lang button[aria-pressed="true"] { background: var(--orange); color: var(--orange-ink); }
+  .lang a:hover { color: var(--text); }
+  .lang a[aria-current="true"] { background: var(--orange); color: var(--orange-ink); }
   @media (max-width: 640px) { nav a { display: none; } }
 
   .eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin: 0 0 12px; }
@@ -204,8 +226,8 @@
       <a href="#radio">Drive Radio</a>
       <a href="#dashcam" hidden>Drive Dashcam</a>
       <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-set-lang="bg" aria-pressed="true">BG</button>
-        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        <a href="/" hreflang="bg" lang="bg" aria-current="true">BG</a>
+        <a href="/en/" hreflang="en" lang="en" aria-current="false">EN</a>
       </div>
     </nav>
   </div>
@@ -226,9 +248,9 @@
         <span data-l="en">Get in, your phone connects to the car and your radio starts on its own. Drive Radio keeps the music with you, without you having to think about it.</span>
       </p>
       <div class="actions">
-        <a class="gplay" href="https://play.google.com/store/apps/details?id=bg.driveradio.app">
-          <img data-l="bg" src="img/gplay-bg.png" width="646" height="192" alt="Изтеглете от Google Play">
-          <img data-l="en" src="img/gplay-en.png" width="564" height="168" alt="Get it on Google Play">
+        <a class="gplay" href="https://play.google.com/store/apps/details?id=bg.driveradio.app&amp;referrer=utm_source%3Ddriveradio.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhome_bg">
+          <img data-l="bg" src="/img/gplay-bg.png" width="646" height="192" alt="Изтеглете от Google Play">
+          <img data-l="en" src="/img/gplay-en.png" width="564" height="168" alt="Get it on Google Play">
         </a>
         <a class="btn btn-web" href="https://player.driveradio.app/">
           <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M10 7.8v8.4l6.6-4.2z" fill="#050505"/></svg>
@@ -241,7 +263,7 @@
       </p>
     </div>
     <div class="shot">
-      <img src="img/radio-player.jpg" width="1600" height="720" alt="Drive Radio player in landscape: clock, temperature, station cover and big buttons">
+      <img src="/img/radio-player.jpg" width="1600" height="720" alt="Drive Radio player in landscape: clock, temperature, station cover and big buttons">
     </div>
   </div>
 
@@ -272,7 +294,7 @@
           </ul>
         </div>
         <div class="row-media">
-          <div class="shot"><img src="img/radio-player.jpg" width="1600" height="719" loading="lazy" alt="Drive Radio playing in landscape with a big clock and temperature"></div>
+          <div class="shot"><img src="/img/radio-player.jpg" width="1600" height="719" loading="lazy" alt="Drive Radio playing in landscape with a big clock and temperature"></div>
         </div>
       </div>
 
@@ -292,8 +314,8 @@
           </ul>
         </div>
         <div class="row-media phones-2">
-          <div class="shot"><img data-l="bg" src="img/phone-search.jpg" width="600" height="1278" loading="lazy" alt="Searching radio stations by name and country"><img data-l="en" src="img/phone-search-en.jpg" width="600" height="1278" loading="lazy" alt="Searching radio stations by name and country"></div>
-          <div class="shot"><img data-l="bg" src="img/phone-caught.jpg" width="600" height="1278" loading="lazy" alt="Сайтът на радиото в Drive Radio: потокът е намерен, бутони Добави и Добави и пусни"><img data-l="en" src="img/phone-caught-en.jpg" width="600" height="1278" loading="lazy" alt="A radio website inside Drive Radio: stream found, with Add and Add and play buttons"></div>
+          <div class="shot"><img data-l="bg" src="/img/phone-search.jpg" width="600" height="1278" loading="lazy" alt="Searching radio stations by name and country"><img data-l="en" src="/img/phone-search-en.jpg" width="600" height="1278" loading="lazy" alt="Searching radio stations by name and country"></div>
+          <div class="shot"><img data-l="bg" src="/img/phone-caught.jpg" width="600" height="1278" loading="lazy" alt="Сайтът на радиото в Drive Radio: потокът е намерен, бутони Добави и Добави и пусни"><img data-l="en" src="/img/phone-caught-en.jpg" width="600" height="1278" loading="lazy" alt="A radio website inside Drive Radio: stream found, with Add and Add and play buttons"></div>
         </div>
       </div>
 
@@ -313,8 +335,8 @@
           </ul>
         </div>
         <div class="row-media phones-2">
-          <div class="shot"><img data-l="bg" src="img/phone-player.jpg" width="600" height="1278" loading="lazy" alt="Player showing the song, the cover and the list of favorites"><img data-l="en" src="img/phone-player-en.jpg" width="600" height="1278" loading="lazy" alt="Player showing the song, the cover and the list of favorites"></div>
-          <div class="shot"><img data-l="bg" src="img/phone-platforms.jpg" width="600" height="1278" loading="lazy" alt="Choosing the music platform for the song button"><img data-l="en" src="img/phone-platforms-en.jpg" width="600" height="1278" loading="lazy" alt="Choosing the music platform for the song button"></div>
+          <div class="shot"><img data-l="bg" src="/img/phone-player.jpg" width="600" height="1278" loading="lazy" alt="Player showing the song, the cover and the list of favorites"><img data-l="en" src="/img/phone-player-en.jpg" width="600" height="1278" loading="lazy" alt="Player showing the song, the cover and the list of favorites"></div>
+          <div class="shot"><img data-l="bg" src="/img/phone-platforms.jpg" width="600" height="1278" loading="lazy" alt="Choosing the music platform for the song button"><img data-l="en" src="/img/phone-platforms-en.jpg" width="600" height="1278" loading="lazy" alt="Choosing the music platform for the song button"></div>
         </div>
       </div>
 
@@ -333,8 +355,8 @@
           </ul>
         </div>
         <div class="row-media stack">
-          <div class="shot"><img src="img/radio-carmode-buttons.jpg" width="1600" height="719" loading="lazy" alt="Car Mode with quick buttons for navigation, music and phone on the left"></div>
-          <div class="shot"><img src="img/radio-carmode-favorites.jpg" width="1600" height="719" loading="lazy" alt="Car Mode player next to the list of favorite stations"></div>
+          <div class="shot"><img src="/img/radio-carmode-buttons.jpg" width="1600" height="719" loading="lazy" alt="Car Mode with quick buttons for navigation, music and phone on the left"></div>
+          <div class="shot"><img src="/img/radio-carmode-favorites.jpg" width="1600" height="719" loading="lazy" alt="Car Mode player next to the list of favorite stations"></div>
         </div>
       </div>
 
@@ -354,8 +376,8 @@
           </ul>
         </div>
         <div class="row-media nav-pair">
-          <div class="shot"><img src="img/radio-waze-wide.jpg" width="1600" height="719" loading="lazy" alt="Waze in landscape with the Drive Radio song control and REC counter on top"></div>
-          <div class="shot"><img src="img/radio-waze-tall.jpg" width="600" height="1278" loading="lazy" alt="Waze upright with the Drive Radio song control and REC counter on top"></div>
+          <div class="shot"><img src="/img/radio-waze-wide.jpg" width="1600" height="719" loading="lazy" alt="Waze in landscape with the Drive Radio song control and REC counter on top"></div>
+          <div class="shot"><img src="/img/radio-waze-tall.jpg" width="600" height="1278" loading="lazy" alt="Waze upright with the Drive Radio song control and REC counter on top"></div>
         </div>
       </div>
 
@@ -475,8 +497,8 @@
           </ul>
         </div>
         <div class="row-media stack">
-          <div class="shot"><img src="img/dashcam-road.jpg" width="1800" height="810" loading="lazy" alt="Drive Dashcam recording on a city bridge, with speed, time and place on the video"></div>
-          <div class="shot"><img src="img/dashcam-radio.jpg" width="1800" height="810" loading="lazy" alt="Drive Dashcam recording in town with the Drive Radio floating music control on top"></div>
+          <div class="shot"><img src="/img/dashcam-road.jpg" width="1800" height="810" loading="lazy" alt="Drive Dashcam recording on a city bridge, with speed, time and place on the video"></div>
+          <div class="shot"><img src="/img/dashcam-radio.jpg" width="1800" height="810" loading="lazy" alt="Drive Dashcam recording in town with the Drive Radio floating music control on top"></div>
         </div>
       </div>
 
@@ -497,12 +519,12 @@
         </div>
         <div class="row-media phones-2">
           <div class="shot">
-            <img data-l="bg" src="img/dash-auto-bg.jpg" width="600" height="1278" loading="lazy" alt="Настройки на колата: запис, навигация на екрана, музика във фона">
-            <img data-l="en" src="img/dash-auto-en.jpg" width="600" height="1278" loading="lazy" alt="Car settings: record video, navigation on screen, music in the background">
+            <img data-l="bg" src="/img/dash-auto-bg.jpg" width="600" height="1278" loading="lazy" alt="Настройки на колата: запис, навигация на екрана, музика във фона">
+            <img data-l="en" src="/img/dash-auto-en.jpg" width="600" height="1278" loading="lazy" alt="Car settings: record video, navigation on screen, music in the background">
           </div>
           <div class="shot">
-            <img data-l="bg" src="img/dash-extras-bg.jpg" width="600" height="1278" loading="lazy" alt="Сила на звука, буден екран и действия при слизане">
-            <img data-l="en" src="img/dash-extras-en.jpg" width="600" height="1278" loading="lazy" alt="Volume on connect, keep screen awake and what happens on disconnect">
+            <img data-l="bg" src="/img/dash-extras-bg.jpg" width="600" height="1278" loading="lazy" alt="Сила на звука, буден екран и действия при слизане">
+            <img data-l="en" src="/img/dash-extras-en.jpg" width="600" height="1278" loading="lazy" alt="Volume on connect, keep screen awake and what happens on disconnect">
           </div>
         </div>
       </div>
@@ -523,7 +545,7 @@
           </ul>
         </div>
         <div class="row-media single-phone">
-          <div class="shot"><img src="img/dashcam-portrait.jpg" width="600" height="1333" loading="lazy" alt="Drive Dashcam recording upright, with the shield button to protect the clip"></div>
+          <div class="shot"><img src="/img/dashcam-portrait.jpg" width="600" height="1333" loading="lazy" alt="Drive Dashcam recording upright, with the shield button to protect the clip"></div>
         </div>
       </div>
 
@@ -544,11 +566,11 @@
         </div>
         <div class="row-media stack">
           <figure>
-            <div class="shot"><img src="img/nav-pip.jpg" width="1600" height="800" loading="lazy" alt="Waze on full screen with the Drive Dashcam recording in a small window in the corner"></div>
+            <div class="shot"><img src="/img/nav-pip.jpg" width="1600" height="800" loading="lazy" alt="Waze on full screen with the Drive Dashcam recording in a small window in the corner"></div>
             <figcaption><span data-l="bg">Малко прозорче – виждаш пътя, докато навигацията е на целия екран.</span><span data-l="en">Small window – you still see the road while navigation fills the screen.</span></figcaption>
           </figure>
           <figure>
-            <div class="shot"><img src="img/nav-counter.jpg" width="1200" height="496" loading="lazy" alt="Waze map with a small Drive Dashcam REC counter floating on top"></div>
+            <div class="shot"><img src="/img/nav-counter.jpg" width="1200" height="496" loading="lazy" alt="Waze map with a small Drive Dashcam REC counter floating on top"></div>
             <figcaption><span data-l="bg">Малък брояч REC – навигацията остава цялата, а ти знаеш, че записът тече.</span><span data-l="en">Tiny REC counter – the navigation stays whole, and you know recording is on.</span></figcaption>
           </figure>
         </div>
@@ -570,7 +592,7 @@
           </ul>
         </div>
         <div class="row-media single-phone">
-          <div class="shot"><img src="img/dash-map.jpg" width="600" height="1278" loading="lazy" alt="Trip on the map with start, end, top speed and a speed graph"></div>
+          <div class="shot"><img src="/img/dash-map.jpg" width="600" height="1278" loading="lazy" alt="Trip on the map with start, end, top speed and a speed graph"></div>
         </div>
       </div>
 
@@ -619,7 +641,7 @@
     <div>
       <h4 class="brand-inline">Drive <b>Radio</b></h4>
       <ul>
-        <li><a href="https://play.google.com/store/apps/details?id=bg.driveradio.app">Google Play</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=bg.driveradio.app&amp;referrer=utm_source%3Ddriveradio.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhome_bg">Google Play</a></li>
         <li><a href="https://player.driveradio.app/"><span data-l="bg">Уеб плеър</span><span data-l="en">Web player</span></a></li>
         <li><a href="https://player.driveradio.app/privacy-policy.html"><span data-l="bg">Поверителност</span><span data-l="en">Privacy</span></a></li>
         <li><a href="https://player.driveradio.app/terms.html"><span data-l="bg">Условия</span><span data-l="en">Terms</span></a></li>
@@ -635,7 +657,7 @@
       </ul>
       <h4><span data-l="bg">Полезно</span><span data-l="en">Guides</span></h4>
       <ul>
-        <li data-l="bg"><a href="/radio-v-kolata/">Радиото да тръгва само в колата</a></li>
+        <li data-l="bg"><a href="/radio-v-kolata/">Радиото да стартира само в колата</a></li>
         <li data-l="bg"><a href="/android-auto-radio/">Интернет радио с Android Auto</a></li>
         <li data-l="bg"><a href="/bulgarski-radia/">Български радиа онлайн в колата</a></li>
         <li data-l="en"><a href="/en/radio-starts-automatically-in-car/">Radio that starts on its own in the car</a></li>
@@ -653,27 +675,5 @@
   </div>
 </footer>
 
-<script>
-  (function () {
-    var KEY = 'driveStudioLang';
-    function apply(lang) {
-      document.documentElement.lang = lang;
-      document.querySelectorAll('[data-set-lang]').forEach(function (b) {
-        b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang));
-      });
-    }
-    var saved = null;
-    try { saved = localStorage.getItem(KEY); } catch (e) {}
-    var guess = (navigator.language || 'en').toLowerCase().indexOf('bg') === 0 ? 'bg' : 'en';
-    apply(saved === 'bg' || saved === 'en' ? saved : guess);
-    document.querySelectorAll('[data-set-lang]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var lang = b.getAttribute('data-set-lang');
-        apply(lang);
-        try { localStorage.setItem(KEY, lang); } catch (e) {}
-      });
-    });
-  })();
-</script>
 </body>
 </html>
