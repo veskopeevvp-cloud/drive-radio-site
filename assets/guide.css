@@ -19,6 +19,8 @@ header { border-bottom: 1px solid var(--line); }
 .lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
 .lang a { color: var(--dim); text-decoration: none; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; padding: 6px 12px; }
 .lang a[aria-current="true"] { background: var(--orange); color: var(--orange-ink); }
+.lang a { display: inline-flex; align-items: center; gap: 6px; }
+.lang .flag { display: block; width: 18px; height: 12px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,0.18); }
 article { max-width: 680px; margin: 0 auto; padding: 56px 20px 24px; }
 .crumb { font-size: 0.85rem; margin: 0 0 22px; }
 .crumb a { color: var(--dim); text-decoration: none; }

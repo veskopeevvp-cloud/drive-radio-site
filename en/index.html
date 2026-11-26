@@ -87,6 +87,8 @@
   }
   .lang a:hover { color: var(--text); }
   .lang a[aria-current="true"] { background: var(--orange); color: var(--orange-ink); }
+  .lang a { display: inline-flex; align-items: center; gap: 6px; }
+  .lang .flag { display: block; width: 18px; height: 12px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,0.18); }
   @media (max-width: 640px) { nav a { display: none; } }
 
   .eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin: 0 0 12px; }
@@ -226,8 +228,8 @@
       <a href="#radio">Drive Radio</a>
       <a href="#dashcam" hidden>Drive Dashcam</a>
       <div class="lang" role="group" aria-label="Language">
-        <a href="/" hreflang="bg" lang="bg" aria-current="false">BG</a>
-        <a href="/en/" hreflang="en" lang="en" aria-current="true">EN</a>
+        <a href="/" hreflang="bg" lang="bg" aria-current="false"><img class="flag" src="/img/flag-bg.svg" width="18" height="12" alt="">BG</a>
+        <a href="/en/" hreflang="en" lang="en" aria-current="true"><img class="flag" src="/img/flag-gb.svg" width="18" height="12" alt="">EN</a>
       </div>
     </nav>
   </div>
