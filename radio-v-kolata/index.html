@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
-<link rel="stylesheet" href="/assets/guide.css?v=2">
+<link rel="stylesheet" href="/assets/guide.css?v=3">
 </head>
 <body>
 <header>
@@ -58,6 +58,16 @@
   <li>Избираш станцията, с която искаш да те посреща. Изборът е голям: търсенето минава през Radio Browser, отворен световен каталог с над 50 000 онлайн радиа.</li>
 </ol>
 <p>Това е. Следващия път радиото стартира само.</p>
+<p>Ето цялата настройка на видео, стъпка по стъпка, заедно с навигацията и това какво става, когато слезеш от колата:</p>
+<figure class="video">
+  <div class="yt-wrap">
+    <button type="button" class="yt-facade" data-yt="j1zoigoXubA" aria-label="Пусни видеото: как радиото да стартира само в колата">
+      <img src="/img/short-autostart-bg.jpg" width="540" height="960" loading="lazy" alt="">
+      <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+    </button>
+  </div>
+  <figcaption>Настройката за една минута. <a href="https://youtube.com/shorts/j1zoigoXubA" target="_blank" rel="noopener">Гледай в YouTube ↗</a></figcaption>
+</figure>
 <h2>Едно нещо, което научих по трудния начин</h2>
 <p>Някои телефони, най-често Xiaomi, Huawei и Honor, спират приложенията във фона, за да пестят батерия. Тогава радиото просто не стартира и човек си мисли, че не работи.</p>
 <p>Затова при първото пускане Drive Radio сам ти показва кои разрешения да дадеш на твоя телефон и те води до тях. Отнема минута, но е разликата между „понякога стартира“ и „стартира винаги“.</p>
@@ -97,6 +107,17 @@
     });
   });
   try { localStorage.setItem('driveStudioLang', 'bg'); } catch (e) {}
+  // The YouTube player loads only when the visitor presses play.
+  document.querySelectorAll('.yt-facade').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-yt') + '?autoplay=1&playsinline=1&rel=0';
+      f.title = b.getAttribute('aria-label');
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      b.replaceWith(f);
+    });
+  });
 </script>
 </body>
 </html>

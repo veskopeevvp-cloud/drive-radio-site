@@ -38,6 +38,11 @@ PAGES = {
         'VIDEO_URL': 'https://youtube.com/shorts/-r-MTbUttYo',
         'VIDEO_POSTER': '/img/short-car-bg.jpg',
         'VIDEO_LABEL': 'Пусни видеото: Drive Radio в истинска кола',
+        # App tour Short (2026-11-27); empty TOUR_ID hides that section
+        'TOUR_ID': 'HaLtzakHkxw',
+        'TOUR_URL': 'https://youtube.com/shorts/HaLtzakHkxw',
+        'TOUR_POSTER': '/img/short-tour-bg.jpg',
+        'TOUR_LABEL': 'Пусни видеото: обиколка на Drive Radio',
         'BG_CURRENT': 'true',
         'EN_CURRENT': 'false',
     },
@@ -56,6 +61,11 @@ PAGES = {
         'VIDEO_URL': 'https://youtube.com/shorts/qOX-3EwZtns',
         'VIDEO_POSTER': '/img/short-car-en.jpg',
         'VIDEO_LABEL': 'Play the video: Drive Radio in a real car',
+        # EN tour built (facebook\drive_radio_tutorial_tour_EN.mp4), not on YouTube yet
+        'TOUR_ID': '',
+        'TOUR_URL': '',
+        'TOUR_POSTER': '',
+        'TOUR_LABEL': 'Play the video: a tour of Drive Radio',
         'BG_CURRENT': 'false',
         'EN_CURRENT': 'true',
     },
@@ -63,6 +73,7 @@ PAGES = {
 
 for key, page in PAGES.items():
     page['VIDEO_HIDDEN'] = '' if page['VIDEO_ID'] else 'hidden'
+    page['TOUR_HIDDEN'] = '' if page['TOUR_ID'] else 'hidden'
     html = SRC
     for name, value in page.items():
         if name == 'out':
