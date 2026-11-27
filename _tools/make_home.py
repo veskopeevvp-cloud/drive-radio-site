@@ -61,10 +61,9 @@ PAGES = {
         'VIDEO_URL': 'https://youtube.com/shorts/qOX-3EwZtns',
         'VIDEO_POSTER': '/img/short-car-en.jpg',
         'VIDEO_LABEL': 'Play the video: Drive Radio in a real car',
-        # EN tour built (facebook\drive_radio_tutorial_tour_EN.mp4), not on YouTube yet
-        'TOUR_ID': '',
-        'TOUR_URL': '',
-        'TOUR_POSTER': '',
+        'TOUR_ID': 'LFHNiWHaVFo',
+        'TOUR_URL': 'https://youtube.com/shorts/LFHNiWHaVFo',
+        'TOUR_POSTER': '/img/short-tour-en.jpg',
         'TOUR_LABEL': 'Play the video: a tour of Drive Radio',
         'BG_CURRENT': 'false',
         'EN_CURRENT': 'true',

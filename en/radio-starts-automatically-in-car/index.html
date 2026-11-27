@@ -58,6 +58,16 @@
   <li>Choose the station you want to greet you. There is plenty to choose from: the search goes through Radio Browser, an open worldwide catalog of over 50,000 internet radio stations.</li>
 </ol>
 <p>That's it. Next time, the radio starts on its own.</p>
+<p>Here is the whole setup on video, step by step, including the navigation and what happens when you get out of the car:</p>
+<figure class="video">
+  <div class="yt-wrap">
+    <button type="button" class="yt-facade" data-yt="tNm_9HC6Vw8" aria-label="Play the video: how to make the radio start by itself in your car">
+      <img src="/img/short-autostart-en.jpg" width="540" height="960" loading="lazy" alt="">
+      <span class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+    </button>
+  </div>
+  <figcaption>The setup in two minutes. <a href="https://youtube.com/shorts/tNm_9HC6Vw8" target="_blank" rel="noopener">Watch on YouTube ↗</a></figcaption>
+</figure>
 <h2>One thing I learned the hard way</h2>
 <p>Some phones, most often Xiaomi, Huawei and Honor, stop apps in the background to save battery. Then the radio simply doesn't start, and people think it doesn't work.</p>
 <p>That's why, the first time you open it, Drive Radio shows you which permissions your phone needs and takes you to them. It takes a minute, but it's the difference between "sometimes it starts" and "it always starts".</p>
@@ -97,6 +107,17 @@
     });
   });
   try { localStorage.setItem('driveStudioLang', 'en'); } catch (e) {}
+  // The YouTube player loads only when the visitor presses play.
+  document.querySelectorAll('.yt-facade').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-yt') + '?autoplay=1&playsinline=1&rel=0';
+      f.title = b.getAttribute('aria-label');
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      b.replaceWith(f);
+    });
+  });
 </script>
 </body>
 </html>
